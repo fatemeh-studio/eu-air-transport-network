@@ -1,0 +1,15 @@
+networkx>=3.2
+pandas>=2.0
+numpy>=1.24
+scipy>=1.11
+matplotlib>=3.7
+plotly>=5.18
+jupyter>=1.0
+ipykernel>=6.0
+python-louvain>=0.16
+pyvis>=0.3.2
+
+# --- dev tooling (not required to run the notebooks) ---
+nbstripout>=0.7
+# Quarto is not a Python package:
+#   conda install -c conda-forge quarto

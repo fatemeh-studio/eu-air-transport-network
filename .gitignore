@@ -216,3 +216,19 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project-specific
+network.db
+network_viz/*.html
+*.ipynb_checkpoints
+data/raw/
+plan/
+
+# Quarto intermediates
+/.quarto/
+*_files/
+
+
+# IDE
+.vscode/
+.cursor/
