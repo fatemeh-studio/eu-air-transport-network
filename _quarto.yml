@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - notebooks/01_graph_construction.ipynb
+    - notebooks/02_centrality_stats.ipynb
+    - notebooks/03_community_detection.ipynb
+    - notebooks/04_resilience_analysis.ipynb
+
+execute:
+  enabled: true
+
+website:
+  title: "European Air Transport Network"
+  site-url: "https://<your-username>.github.io/eu-air-transport-network"
+  navbar:
+    left:
+      - { href: index.qmd, text: Home }
+      - { href: notebooks/01_graph_construction.ipynb, text: "01 · Graph" }
+      - { href: notebooks/02_centrality_stats.ipynb,   text: "02 · Centrality" }
+      - { href: notebooks/03_community_detection.ipynb, text: "03 · Communities" }
+      - { href: notebooks/04_resilience_analysis.ipynb, text: "04 · Resilience" }
+
+format:
+  html:
+    theme: darkly
+    toc: true

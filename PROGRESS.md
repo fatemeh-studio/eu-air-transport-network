@@ -39,7 +39,7 @@ Data source vetted and accepted. Next: src/build_graph.py.
 ## Reports (Quarto)
 - [x] nbstripout installed (`nbstripout --status` → OK)
 - [x] Quarto installed in the conda env (`quarto check` → OK)
-- [ ] GitHub Pages enabled (Settings → Pages → Deploy from a branch → main / (root))
+- [ ] GitHub Pages enabled (Settings → Pages → Deploy from a branch → main / docs)
 
 ---
 
@@ -99,13 +99,13 @@ Data source vetted and accepted. Next: src/build_graph.py.
 - **Quarto from conda-forge into `eu-air-network`, not the system .deb**
   → No sudo, version travels with the env, consistent with the conda-only rule.
 
-- **Reports rendered with `--execute --embed-resources`**
-  → Stripped notebooks have no stored outputs, so Quarto must execute (doubles as the
-    restart-and-run-all check); embedding gives one standalone HTML because .gitignore
-    excludes `*_files/`.
+- **Site rendered as a Quarto website** (_quarto.yml, type: website, output-dir: docs)
+  → One linked site with a shared docs/site_libs/, not N standalone HTMLs. docs/ IS
+    committed — the documented exception to the no-build-artifacts rule. Still --execute
+    (stripped notebooks carry no stored outputs).
 
-- **Pages source = main / (root) + .nojekyll**, reports stay in `reports/`
-  → Pages only offers root or /docs; root avoids renaming the folder.
+- **Pages source = main / docs**, .nojekyll at repo root (Quarto also writes docs/.nojekyll)
+  → Website output lives in docs/. The reports/ folder is no longer used.
 
 ---
 
@@ -136,7 +136,7 @@ Data source vetted and accepted. Next: src/build_graph.py.
 *Add findings here as each notebook is completed.*
 
 **NB01 — Graph construction:**
--
+- *fill in*
 
 **NB02 — Centrality:**
 - Vienna (VIE) betweenness rank: —
@@ -187,11 +187,14 @@ Data source vetted and accepted. Next: src/build_graph.py.
 
 - `quarto render <nb>.ipynb` does not execute cells by default — always pass `--execute`.
 
-- Never render without `--embed-resources`: the sibling `*_files/` dir is gitignored →
-  published report loses its CSS/JS.
+- Website mode: do NOT use --embed-resources. Assets live in docs/site_libs/ and MUST be
+  committed with docs/, or the published site loses its CSS/JS.
 
-- Plotly + `--embed-resources` bundles plotly.js (~3 MB). Run `du -h reports/*.html`
-  before committing — repo rule is nothing > 5 MB. NB01 and NB03 are the risky ones.
+- plotly.min.js sits once in docs/site_libs/ (~3.5 MB). Check `du -sh docs` — still under
+  the per-file 5 MB rule because it's shared, not embedded four times.
+
+- A website needs index.qmd at the root; the explicit render: list stops Quarto pulling
+  README.md and data/README.md in as stray pages.
 
 - Cursor's Quarto extension can't see a conda-installed Quarto unless Cursor is launched
   from an activated env (`conda activate eu-air-network && cursor .`). Irrelevant while

@@ -36,7 +36,7 @@ cursor .
 ## Step 3 — Create the folder structure
 
 ```bash
-mkdir -p src data notebooks sql/queries figures network_viz reports
+mkdir -p src data notebooks sql/queries figures network_viz docs
 touch src/__init__.py src/build_graph.py src/load_db.py src/utils.py
 touch sql/schema.sql
 touch data/README.md
@@ -128,9 +128,8 @@ nbstripout --status
 ## Step 9 — Quarto reports
 
 quarto check
-# only after a notebook is complete and committed:
-quarto render notebooks/04_resilience_analysis.ipynb --to html --execute --embed-resources
-mv notebooks/04_resilience_analysis.html reports/
+### only after a notebook is complete and committed:
+quarto render --execute
 
 ---
 

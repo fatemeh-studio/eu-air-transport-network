@@ -1,0 +1,16 @@
+---
+title: "Structure & Resilience of the European Air Transport Network"
+---
+
+Complex-systems analysis of European aviation — centrality, community
+detection, and network resilience.
+
+> **Data vintage — June 2014.** This is a frozen OpenFlights route snapshot,
+> not the current network. Every figure and claim on this site describes 2014.
+
+**Findings** (fill in after NB04):
+- Scale-free structure — power-law exponent γ ≈ —
+- N communities, modularity Q ≈ —
+- Critical threshold f_c ≈ — (targeted) vs — (random)
+
+Data: [OpenFlights](https://openflights.org/data.html) (open license).
