@@ -14,8 +14,8 @@ Data source vetted and accepted. Next: src/build_graph.py.
 - [ ] `data/README.md`
 
 ### Source modules
-- [ ] `src/utils.py`
-- [ ] `src/build_graph.py`
+- [x] `src/utils.py`
+- [x] `src/build_graph.py`
 - [ ] `src/load_db.py`
 
 ### SQL
@@ -24,7 +24,7 @@ Data source vetted and accepted. Next: src/build_graph.py.
 - [ ] `sql/queries/community_country_distribution.sql`
 
 ### Notebooks
-- [ ] `01_graph_construction.ipynb`
+- [x] `01_graph_construction.ipynb`
 - [ ] `02_centrality_stats.ipynb`
 - [ ] `03_community_detection.ipynb`
 - [ ] `04_resilience_analysis.ipynb`
@@ -121,13 +121,13 @@ Data source vetted and accepted. Next: src/build_graph.py.
 
 ## Graph statistics (fill in after NB01)
 
-| Metric | Value |
-|---|---|
-| Total EU airports (nodes) | — |
-| Total routes (edges) | — |
-| Largest connected component | — |
-| Number of components | — |
-| Network density | — |
+| Metric | DiGraph | Undirected |
+|---|---|---|
+| Total EU airports (nodes) | 559 | 559 |
+| Total routes (edges) | 10,287 | 5,206 |
+| Largest connected component | 5 | 5 |
+| Number of components | 544 (97.3%) | 544 (97.3%) |
+| Network density | 0.033 | 0.033 |
 
 ---
 
@@ -136,7 +136,10 @@ Data source vetted and accepted. Next: src/build_graph.py.
 *Add findings here as each notebook is completed.*
 
 **NB01 — Graph construction:**
-- *fill in*
+- 559 nodes
+- 10,287 directed edges
+- giant component 97.3% (5 components)
+- degree≠traffic — Stansted tops degree, VIE degree-rank 29 (betweenness is the real VIE story, deferred to NB02).
 
 **NB02 — Centrality:**
 - Vienna (VIE) betweenness rank: —
