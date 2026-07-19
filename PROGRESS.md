@@ -1,13 +1,20 @@
 # PROGRESS — European Air Transport Network
 
-**Last updated:** 2026-07-18
-**Current status:** SQLite persistence layer complete. `sql/schema.sql` +
-`src/load_db.py` built, tested, and committed; `src/utils.py` gained SQL path constants
-(`SQL_DIR`, `SCHEMA_PATH`, `SQL_QUERIES_DIR`). Running `python src/load_db.py` loads
-559 nodes + 10,287 directed edges into `network.db` and passes the `pd.read_sql`
-round-trip — node/edge counts match the graph, and all seven centrality/community
-columns are present but NULL, awaiting NB02/NB03. Next: **NB02** — centrality analysis
-(starting with the six centralities + SQLite write-back + the Vienna betweenness query).
+**Last updated:** 2026-07-19
+**Current status:** **NB02 complete.** `02_centrality_stats.ipynb` runs clean top-to-bottom
+in a single file (centralities → RQ1 → degree distribution → small-world), writing all six
+centrality columns for 559 nodes into `network.db` and saving
+`sql/queries/top_airports_by_betweenness.sql`. Research Question 1 is answered — and the
+"Vienna as East–West bridge" hypothesis is **rejected** by the 2014 operating-carrier data
+(VIE is a mid-tier hub: betweenness rank 42 / 42 / 45 on the global / all-East / CEE tests).
+The degree distribution is broad-scale / truncated (NOT scale-free); the network is strongly
+small-world (σ ≈ 11). Next: **NB03** — Louvain community detection, delivered as one
+complete notebook.
+
+> **House voice:** the format of *this file* is the project's prose style — match its
+> density, its `decision → reason` arrows, its **bold** concept lead-ins, and its dating
+> of every claim when writing notebook markdown, README text, or new entries here.
+> Do not reinvent the format.
 
 ---
 
@@ -25,19 +32,19 @@ columns are present but NULL, awaiting NB02/NB03. Next: **NB02** — centrality 
 
 ### SQL
 - [x] `sql/schema.sql`
-- [ ] `sql/queries/top_airports_by_betweenness.sql`  *(NB02 part 1)*
+- [x] `sql/queries/top_airports_by_betweenness.sql`  *(NB02)*
 - [ ] `sql/queries/community_country_distribution.sql`  *(NB03)*
 
 ### Notebooks
 - [x] `01_graph_construction.ipynb`
-- [ ] `02_centrality_stats.ipynb`
+- [x] `02_centrality_stats.ipynb`
 - [ ] `03_community_detection.ipynb`
 - [ ] `04_resilience_analysis.ipynb`
 
 ### Other
-- [ ] `requirements.txt`  *(remember to add `python-kaleido` — see watch-outs)*
+- [ ] `requirements.txt`  *(remember to add `python-kaleido` AND `powerlaw` — see watch-outs)*
 - [ ] `README.md` (final)
-- [x] `figures/` (populated — `route_map.png`)
+- [x] `figures/` (populated — `route_map.png`, `degree_distribution.png`)
 - [x] `.gitattributes` (nbstripout filter)
 - [x] `.nojekyll` (Pages serves reports/ as-is)
 
@@ -113,15 +120,15 @@ columns are present but NULL, awaiting NB02/NB03. Next: **NB02** — centrality 
 
 - **nbstripout as a git clean filter** (`--install --attributes .gitattributes`)
   → Outputs never enter git history: readable diffs, small repo, no figure blobs.
-    Working copies keep their outputs; only the committed blob is stripped.
+  Working copies keep their outputs; only the committed blob is stripped.
 
 - **Quarto from conda-forge into `eu-air-network`, not the system .deb**
   → No sudo, version travels with the env, consistent with the conda-only rule.
 
 - **Site rendered as a Quarto website** (_quarto.yml, type: website, output-dir: docs)
   → One linked site with a shared docs/site_libs/, not N standalone HTMLs. docs/ IS
-    committed — the documented exception to the no-build-artifacts rule. Still --execute
-    (stripped notebooks carry no stored outputs).
+  committed — the documented exception to the no-build-artifacts rule. Still --execute
+  (stripped notebooks carry no stored outputs).
 
 - **Pages source = main / docs**, .nojekyll at repo root (Quarto also writes docs/.nojekyll)
   → Website output lives in docs/. The reports/ folder is no longer used.
@@ -137,6 +144,34 @@ columns are present but NULL, awaiting NB02/NB03. Next: **NB02** — centrality 
 - **Edges stored directed (10,287)** with composite PK (source, destination) + FK to nodes
   + reverse index on destination; undirected projection is rebuilt from build_graph in
   NB03/NB04.
+
+- **Eigenvector centrality computed on the undirected giant component**, not the DiGraph → 
+  eigenvector_centrality_numpy raises AmbiguousSolution on graphs that aren't connected + strongly connected (ours is neither). Off-giant nodes = 0.0. PageRank is the directed-influence measure. Betweenness/closeness are unweighted (weight = carrier-count service proxy, not a distance).
+
+- **Notebooks are delivered as single, complete files — no part 1 / part 2 split** → NB02
+  (centralities + RQ1 + degree distribution + small-world) ran clean top-to-bottom in one
+  file; the planned two-chat split proved an unnecessary hedge. NB03 and NB04 follow the same
+  rule: one scoped notebook, built and delivered complete in a single chat.
+
+- **RQ1 tested three ways with subset betweenness, and the hypothesis was rejected** →
+  global betweenness rewards **intermediaries, not endpoints** (a super-hub is an endpoint;
+  a tree-like periphery's gateway is the bottleneck), so `betweenness_centrality_subset`
+  over East↔West and CEE↔rest paths is the honest test of "Vienna as bridge". Vienna lands
+  at rank 42 / 42 / 45. Reported as-is: VIE is a mid-tier hub, not the East–West bridge —
+  the LCCs had already rewired CEE to point-to-point by 2014 (top CEE gateways are STN, BGY,
+  LTN, DUB), and the codeshare filter hides Austrian's Star Alliance feed. *Structural
+  centrality ≠ commercial importance* — the same lesson NB01's degree ranking flagged.
+
+- **Power-law fit via the `powerlaw` package (Clauset–Shalizi–Newman), not OLS on log-log**
+  → OLS on a binned CCDF is a biased estimator; CSN uses MLE for α with a KS-chosen k_min
+  plus a likelihood-ratio test against alternatives. Result: the pure power law is decisively
+  beaten by both log-normal (R = −5.69) and truncated power law (R = −6.99), p < 0.001 →
+  broad-scale / truncated, NOT clean scale-free (the finite-capacity ceiling of physical
+  airport infrastructure). New pip dependency: `powerlaw`, imported inside the fit cell only.
+
+- **Small-world σ against a seeded ER ensemble (20 realisations)** → σ = (C/C_rand)/(L/L_rand)
+  on the undirected giant component. σ ≈ 11 (C = 0.42 vs 0.035 random; L = 2.71 vs 2.46).
+  Strongly small-world — the structural precondition for NB04's targeted-attack collapse.
 
 ---
 
@@ -198,6 +233,9 @@ CREATE TABLE edges (
 CREATE INDEX idx_edges_destination ON edges (destination);
 ```
 
+Centrality columns now populated (NB02): all six non-NULL for 559 / 559 nodes. `community`
+still NULL, awaiting NB03.
+
 ---
 
 ## Graph statistics (NB01)
@@ -229,10 +267,20 @@ CREATE INDEX idx_edges_destination ON edges (destination);
 - `network.db` round-trip verified: 559 nodes / 10,287 edges, 0 nodes scored (all
   centrality/community columns NULL until NB02/NB03).
 
-**NB02 — Centrality:**
-- Vienna (VIE) betweenness rank: —
-- Power law exponent: —
-- Small-world σ coefficient: —
+**NB02 — Centrality & structure:**
+- all six centralities written to `network.db`: 559 / 559 nodes
+- top betweenness (global): IST 0.0905, ARN 0.0797, OSL 0.0751, ATH 0.0638, STN 0.0546
+- **Vienna betweenness: rank 40 / 479** (>5-airport countries), rank 42 / 559 global, β = 0.0106
+- legacy hubs — high degree, mid betweenness (endpoint-not-intermediary): AMS deg#4 / btw#16,
+  CDG #7 / #17, FRA #8 / #26, MUC #10 / #24, LHR #27 / #49 (LHR low degree = slot-constrained + codeshare-filtered)
+- East–West subset betweenness: **VIE rank 42** (all-East), **rank 45** (CEE-only) — NOT a
+  standout bridge; top CEE gateways are LCC bases STN, BGY, LTN, DUB + aggregator OTP
+- degree distribution: MLE α = 1.59 (k_min 3); **power law decisively beaten** by log-normal
+  (R = −5.69, p ≈ 0) and truncated power law (R = −6.99, p ≈ 0) → broad-scale / truncated,
+  NOT clean scale-free
+- small-world: C = 0.421 vs C_rand 0.035, L = 2.71 vs L_rand 2.46, **σ = 10.9** (≫ 1)
+- **RQ1 answer: Vienna is a mid-tier hub, not the East–West bridge (2014).** Honest finding;
+  structural centrality ≠ commercial importance.
 
 **NB03 — Community detection:**
 - Number of communities (Louvain, resolution=1.0): —
@@ -254,9 +302,30 @@ CREATE INDEX idx_edges_destination ON edges (destination);
 
 - **Vienna narrative is a 2014 statement.** VIE's 2014 degree/betweenness understates its
   position today: Wizz Air / Ryanair / Lauda built VIE bases from 2018 onward, and
-  Ukrainian and Russian airspace closed to EU carriers in 2022. "VIE as East–West bridge"
-  is still a real finding — but it describes 2014 and must be dated as such. This is the
-  one place where staleness touches the project narrative directly.
+  Ukrainian and Russian airspace closed to EU carriers in 2022. The 2014 finding is that VIE
+  is a mid-tier hub, **not** the East–West bridge — report it dated, and note that the
+  present-day picture differs. This is the one place where staleness touches the narrative.
+
+- **RQ1: "scale-free" and "Vienna is the bridge" are BOTH off-limits as claims.** The CSN
+  likelihood-ratio test (NB02) decisively favours log-normal / truncated power law over a
+  pure power law (R = −5.7 / −7.0, p < 0.001) → README wording is "heavy-tailed / broad-scale
+  (truncated power law)", never "scale-free with α = …" (the MLE α = 1.59 is a tail-slope
+  descriptor, not evidence of scale-freeness). And the Vienna betweenness ranks (42/42/45)
+  say VIE is a mid-tier hub, not the East–West bridge — the honest, defensible headline.
+
+- **New dependency: `powerlaw`** (NB02 degree fit). Install with
+  `pip install powerlaw --break-system-packages` inside the conda env; add `powerlaw>=1.5`
+  to `requirements.txt`. Imported inside NB02's fit cell (not at the top), so the rest of the
+  notebook runs even if it is absent.
+
+- **East/West partition is a modelling choice (NB02).** The all-East set includes Russia/CIS,
+  whose Moscow-centred flows dominate the East–West ranking; the CEE-only set excludes them.
+  Both are stated in-notebook and adjustable — neither changes the Vienna conclusion.
+
+- **Codeshare filter understates alliance hubs (surfaced in NB02).** Dropping codeshares
+  removes Austrian/Star Alliance CEE feed (VIE's marketed gateway role) and slot-constrained
+  alliance traffic (LHR's degree is only #27). A real, defensible limitation — name it in the
+  README beside the Vienna finding.
 
 - **Berlin artifact:** TXL and SXF appear as separate airports; BER does not exist in the
   data (opened Oct 2020). Do not "fix" this — it is correct for 2014. (Verified in NB01.)
@@ -268,8 +337,8 @@ CREATE INDEX idx_edges_destination ON edges (destination);
   pruning step needed.
 
 - **schema.sql pre-declares the columns NB02/NB03 will fill — DONE.** Implemented in
-  `sql/schema.sql`. NB02 will `UPDATE` betweenness, closeness, eigenvector, pagerank,
-  in_degree, out_degree; NB03 will `UPDATE` community. All declared NULLable, so later
+  `sql/schema.sql`. NB02 `UPDATE`s betweenness, closeness, eigenvector, pagerank,
+  in_degree, out_degree (done); NB03 will `UPDATE` community. All declared NULLable, so later
   notebooks run `UPDATE`, not `ALTER TABLE`. Final shape:
   `nodes(iata PK, name, city, country, lat, lon, in_degree, out_degree, betweenness,
   closeness, eigenvector, pagerank, community)`,
@@ -320,13 +389,15 @@ CREATE INDEX idx_edges_destination ON edges (destination);
 
 ## Next chat
 
-**Task:** NB02 part 1 — compute the six centralities on the DiGraph (in-degree,
-out-degree, betweenness, closeness, eigenvector, PageRank), `UPDATE` them into the `nodes`
-table, and write `sql/queries/top_airports_by_betweenness.sql` (rank airports by
-betweenness for countries with >5 airports in the dataset, showing VIE's rank explicitly).
-This answers Research Question 1 (Vienna as an East–West bridge, 2014) and populates the
-DB for the rest of NB02.
-*(Degree distribution / power-law fit / small-world σ → NB02 part 2, a separate chat —
-NB02 is too large for one chat.)*
-**Start message:** "Current state: see PROGRESS.md. Today's task: NB02 part 1 — six centralities + UPDATE into nodes + top_airports_by_betweenness.sql"
+**Task:** NB03 (complete, one notebook) — Louvain community detection answering Research
+Question 2 (do aviation communities follow country borders?). On the undirected giant
+component with `python-louvain`: run resolution 0.5 / 1.0 / 1.5 and report modularity Q for
+each, pick a working resolution, assign community labels back to nodes and `UPDATE` the
+`community` column in `network.db`, and write `sql/queries/community_country_distribution.sql`
+(dominant country per community). Both visualisations go in the same notebook — a geographic
+Plotly map coloured by community, and a PyVis force-directed graph (colour = community,
+size = degree) saved to `network_viz/community_network.html`. Analyse whether communities
+align with geography, country, or airline alliances. Deliver as a single complete
+`03_community_detection.ipynb` — **not** split into parts.
+**Start message:** "Current state: see PROGRESS.md. Today's task: NB03 (complete, one notebook) — Louvain community detection: resolution sweep 0.5/1.0/1.5 + modularity Q, UPDATE the community column, community_country_distribution.sql, geographic Plotly community map + PyVis html."
 **Relevant uploaded files Claude should read:** PROGRESS.md, src/build_graph.py, src/utils.py, src/load_db.py

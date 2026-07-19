@@ -8,6 +8,7 @@ jupyter>=1.0
 ipykernel>=6.0
 python-louvain>=0.16
 pyvis>=0.3.2
+powerlaw>=2.0.0
 
 # --- dev tooling (not required to run the notebooks) ---
 nbstripout>=0.7
