@@ -90,8 +90,8 @@ Note: data/airports.dat and data/routes.dat ARE tracked in git (small, static fi
 ```bash
 conda create -n eu-air-network python=3.11 -y
 conda activate eu-air-network
-conda install -c conda-forge networkx pandas numpy scipy matplotlib plotly jupyter ipykernel nbstripout quarto python-kaleido -y
-pip install python-louvain pyvis
+conda install -c conda-forge networkx pandas numpy scipy matplotlib plotly jupyter ipykernel nbstripout quarto python-kaleido scikit-learn -y
+pip install python-louvain pyvis powerlaw
 python -m ipykernel install --user --name eu-air-network --display-name "EU Air Network"
 ```
 
@@ -113,6 +113,8 @@ python-louvain>=0.16
 pyvis>=0.3.2
 nbstripout>=0.7
 python-kaleido>=1.3.0
+powerlaw>=1.5
+scikit-learn>=1.3
 EOF
 ```
 

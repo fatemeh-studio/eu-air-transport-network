@@ -1,15 +1,16 @@
 # PROGRESS — European Air Transport Network
 
 **Last updated:** 2026-07-19
-**Current status:** **NB02 complete.** `02_centrality_stats.ipynb` runs clean top-to-bottom
-in a single file (centralities → RQ1 → degree distribution → small-world), writing all six
-centrality columns for 559 nodes into `network.db` and saving
-`sql/queries/top_airports_by_betweenness.sql`. Research Question 1 is answered — and the
-"Vienna as East–West bridge" hypothesis is **rejected** by the 2014 operating-carrier data
-(VIE is a mid-tier hub: betweenness rank 42 / 42 / 45 on the global / all-East / CEE tests).
-The degree distribution is broad-scale / truncated (NOT scale-free); the network is strongly
-small-world (σ ≈ 11). Next: **NB03** — Louvain community detection, delivered as one
-complete notebook.
+**Current status:** **NB03 complete.** `03_community_detection.ipynb` runs clean top-to-bottom
+in a single file (resolution sweep → partition → DB write → three border tests → geographic
+map + PyVis), writing the `community` column for the 544 giant-component nodes into
+`network.db` and saving `sql/queries/community_country_distribution.sql`. Research Question 2
+is answered — **aviation communities emerge and are geographic, but follow *regions*, not
+country borders**: Louvain finds 6 blocs at γ = 1.0 (Q = 0.2933, ≈ 2.4× the modularity of the
+52-country partition; 50% of links intra-community vs 20% intra-country; NMI 0.47 / ARI 0.24).
+Two near-mono-national domestic cores (Norway 71%, Turkey 78%) sit apart from cross-border
+LCC/charter markets. Next: **NB04** — resilience / percolation (random vs targeted attack),
+delivered as one complete notebook.
 
 > **House voice:** the format of *this file* is the project's prose style — match its
 > density, its `decision → reason` arrows, its **bold** concept lead-ins, and its dating
@@ -33,16 +34,16 @@ complete notebook.
 ### SQL
 - [x] `sql/schema.sql`
 - [x] `sql/queries/top_airports_by_betweenness.sql`  *(NB02)*
-- [ ] `sql/queries/community_country_distribution.sql`  *(NB03)*
+- [x] `sql/queries/community_country_distribution.sql`  *(NB03)*
 
 ### Notebooks
 - [x] `01_graph_construction.ipynb`
 - [x] `02_centrality_stats.ipynb`
-- [ ] `03_community_detection.ipynb`
+- [x] `03_community_detection.ipynb`
 - [ ] `04_resilience_analysis.ipynb`
 
 ### Other
-- [ ] `requirements.txt`  *(remember to add `python-kaleido` AND `powerlaw` — see watch-outs)*
+- [ ] `requirements.txt`  *(remember to add `python-kaleido`, `powerlaw`, AND `scikit-learn` — see watch-outs)*
 - [ ] `README.md` (final)
 - [x] `figures/` (populated — `route_map.png`, `degree_distribution.png`)
 - [x] `.gitattributes` (nbstripout filter)
@@ -173,6 +174,21 @@ complete notebook.
   on the undirected giant component. σ ≈ 11 (C = 0.42 vs 0.035 random; L = 2.71 vs 2.46).
   Strongly small-world — the structural precondition for NB04's targeted-attack collapse.
 
+- **Louvain on the undirected giant component, weighted by operating-carrier count** (NB03)
+  → Community detection is a symmetric, topological question, so it runs on the undirected
+  projection's giant component (544 nodes), matching NB02's small-world/eigenvector treatment;
+  off-giant nodes get `community = NULL` (mirrors the off-giant eigenvector = 0.0 decision).
+  Edges enter weighted: for modularity, weight reads as **coupling strength** (an 8-carrier
+  link binds tighter than a 1-carrier link) — the correct semantic, and NOT a contradiction of
+  NB02's unweighted betweenness, where weight would have wrongly meant *distance*.
+
+- **Working resolution γ = 1.0, chosen by a stability-checked sweep** (NB03)
+  → Reported the seed-42 partition but swept 20 seeds per resolution. γ = 0.5 is **degenerate**
+  (Q ≈ 0.17, community count swinging 15–117: the greedy optimiser shatters this dense
+  small-world graph at low resolution); γ = 1.0 is best-scoring AND most stable (6 communities,
+  Q = 0.293, count 5–8); γ = 1.5 subdivides into ~12. Communities relabelled largest-first so
+  the DB column and every colour are seed-stable.
+
 ---
 
 ## Current SQLite schema
@@ -233,8 +249,8 @@ CREATE TABLE edges (
 CREATE INDEX idx_edges_destination ON edges (destination);
 ```
 
-Centrality columns now populated (NB02): all six non-NULL for 559 / 559 nodes. `community`
-still NULL, awaiting NB03.
+Centrality columns populated (NB02): all six non-NULL for 559 / 559 nodes. `community`
+populated (NB03): non-NULL for the 544 giant-component nodes, NULL for the 15 off-giant.
 
 ---
 
@@ -283,9 +299,19 @@ still NULL, awaiting NB03.
   structural centrality ≠ commercial importance.
 
 **NB03 — Community detection:**
-- Number of communities (Louvain, resolution=1.0): —
-- Modularity Q: —
-- Do communities follow country borders? —
+- Louvain on undirected giant (weighted, γ=1.0, seed=42): **6 communities, Q = 0.2933**
+- resolution sweep (seed 42 | 20-seed stability): 0.5 → 17 comm, Q 0.266 (degenerate, 15–117);
+  1.0 → 6 comm, Q 0.293 (stable 5–8); 1.5 → 12 comm, Q 0.288 (stable 10–14)
+- **RQ2 answer: communities are regional, NOT national.** Louvain Q 0.293 vs country-partition
+  Q 0.122 (**2.4×**); intra-community edges **50.2%** vs intra-country **19.7%**; NMI 0.473 / ARI 0.242
+- 6 blocs (size-ranked · dominant country · share): 0 UK (128, 23%), 1 France (110, 35%),
+  2 Sweden (104, 27%), 3 Greece (91, 40%), 4 Norway (65, **71%**), 5 Turkey (46, **78%**)
+- domestic cores (Norway 71%, Turkey 78%) = dense internal networks that self-isolate; the other
+  four are cross-border LCC/charter markets (no single flag dominant)
+- **Vienna → community 3** (Greece/Germany/Balkans bloc), consistent with its 2014 CE/SE feed
+- these are *operating-carrier* communities (NB02 codeshare filter removed alliance branding)
+- 544 nodes labelled / 15 off-giant NULL in `network.db`; map → `figures/community_map.png`,
+  interactive → `network_viz/community_network.html`
 
 **NB04 — Resilience:**
 - Critical threshold f_c (targeted attack): —
@@ -317,6 +343,21 @@ still NULL, awaiting NB03.
   `pip install powerlaw --break-system-packages` inside the conda env; add `powerlaw>=1.5`
   to `requirements.txt`. Imported inside NB02's fit cell (not at the top), so the rest of the
   notebook runs even if it is absent.
+
+- **New dependency (NB03): `scikit-learn` ONLY.** python-louvain and pyvis were ALREADY
+  installed at project setup (`pip install python-louvain pyvis`, GITHUB_SETUP Step 6) — do NOT
+  reinstall them. NB03 adds only scikit-learn (NMI/ARI for the RQ2 border test):
+  `conda install -c conda-forge scikit-learn`; add `scikit-learn>=1.3` to `requirements.txt`.
+  GITHUB_SETUP.md Steps 6–7 updated accordingly.
+
+- **`python-louvain` 0.16 crashes on `weight=None`** (`TypeError: keywords must be strings` in
+  `induced_graph`). Always pass a string weight key — NB03 uses `weight="weight"`. For an
+  unweighted Louvain, add a unit `weight=1` to every edge rather than passing `None`.
+
+- **Louvain is stochastic; γ = 0.5 is degenerate on this graph.** Fix `random_state=42` for the
+  reported partition. The 20-seed sweep shows γ = 1.0 stable (5–8 communities) but γ = 0.5
+  swinging 15–117 at low Q — report it as degeneracy, not a coarse partition. Re-running
+  `load_db.py` drops/recreates the tables and WIPES the `community` column — re-run NB03 after.
 
 - **East/West partition is a modelling choice (NB02).** The all-East set includes Russia/CIS,
   whose Moscow-centred flows dominate the East–West ranking; the CEE-only set excludes them.
@@ -389,15 +430,17 @@ still NULL, awaiting NB03.
 
 ## Next chat
 
-**Task:** NB03 (complete, one notebook) — Louvain community detection answering Research
-Question 2 (do aviation communities follow country borders?). On the undirected giant
-component with `python-louvain`: run resolution 0.5 / 1.0 / 1.5 and report modularity Q for
-each, pick a working resolution, assign community labels back to nodes and `UPDATE` the
-`community` column in `network.db`, and write `sql/queries/community_country_distribution.sql`
-(dominant country per community). Both visualisations go in the same notebook — a geographic
-Plotly map coloured by community, and a PyVis force-directed graph (colour = community,
-size = degree) saved to `network_viz/community_network.html`. Analyse whether communities
-align with geography, country, or airline alliances. Deliver as a single complete
-`03_community_detection.ipynb` — **not** split into parts.
-**Start message:** "Current state: see PROGRESS.md. Today's task: NB03 (complete, one notebook) — Louvain community detection: resolution sweep 0.5/1.0/1.5 + modularity Q, UPDATE the community column, community_country_distribution.sql, geographic Plotly community map + PyVis html."
+**Task:** NB04 (complete, one notebook) — resilience / percolation answering Research
+Question 3 (how vulnerable is the network to targeted hub attack vs random failure?). On the
+undirected giant component: implement two node-removal strategies — **random failure** (uniform,
+averaged over 20 runs) and **targeted attack** (decreasing degree, then decreasing betweenness).
+At each removal step record fraction removed, size of the largest connected component (as a
+fraction of the original), and number of components. Plot both curves on the same axes — the
+divergence is the **Barabási (2000)** result. Find the critical threshold f_c (fraction at which
+the giant component drops below 50% of original size) for each strategy. Add a plain-language
+interpretation cell (3–5 sentences): what would the loss of Frankfurt, Heathrow or Amsterdam
+mean for European connectivity? Export the resilience curve to `figures/`. References:
+Barabási & Albert (1999) Science 286; Albert, Jeong & Barabási (2000) Nature 406. Deliver as a
+single complete `04_resilience_analysis.ipynb` — **not** split into parts.
+**Start message:** "Current state: see PROGRESS.md. Today's task: NB04 (complete, one notebook) — resilience: random failure vs targeted attack (degree then betweenness), giant-component curves on one axes, critical threshold f_c, Barabási framing, plain-language policy interpretation."
 **Relevant uploaded files Claude should read:** PROGRESS.md, src/build_graph.py, src/utils.py, src/load_db.py
