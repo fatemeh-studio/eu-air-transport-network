@@ -21,7 +21,7 @@ Quarto site** — the write-up, gallery, and GitHub Pages render.
 ### Data
 - [x] `data/airports.dat` — downloaded from OpenFlights
 - [x] `data/routes.dat` — downloaded from OpenFlights
-- [ ] `data/README.md`
+- [x] `data/README.md`
 
 ### Source modules
 - [x] `src/utils.py` — added SQL path constants
@@ -41,16 +41,19 @@ Quarto site** — the write-up, gallery, and GitHub Pages render.
 - [x] `04_resilience_analysis.ipynb`
 
 ### Other
-- [ ] `requirements.txt`  *(remember to add `python-kaleido`, `powerlaw`, AND `scikit-learn` — see watch-outs)*
-- [ ] `README.md` (final)
-- [x] `figures/` (populated — `route_map.png`, `degree_distribution.png`)
+- [x] `requirements.txt` (final) — added `kaleido` (pip name), scikit-learn, powerlaw>=2.0.0
+- [x] `README.md` (final)
+- [x] `figures/` (populated)
 - [x] `.gitattributes` (nbstripout filter)
 - [x] `.nojekyll` (Pages serves reports/ as-is)
+- [x] `environment.yml` (NEW — one-command reproduce)
 
 ## Reports (Quarto)
 - [x] nbstripout installed (`nbstripout --status` → OK)
 - [x] Quarto installed in the conda env (`quarto check` → OK)
-- [ ] GitHub Pages enabled (Settings → Pages → Deploy from a branch → main / docs)
+- [x] `index.qmd` (rewritten — honest findings, replaced the scale-free placeholder)
+- [x] GitHub Pages enabled (Settings → Pages → Deploy from a branch → main / docs)
+- [x] `_quarto.yml` (site-url → Pages URL; GitHub navbar link)
 
 ---
 
@@ -197,6 +200,18 @@ Quarto site** — the write-up, gallery, and GitHub Pages render.
   being attacked). The SQL hub_ranking read is defensive (skips if betweenness is NULL), so
   restart-and-run-all is clean even on a fresh DB. Persisted (directed) vs undirected-giant
   betweenness agree at Spearman ρ = 0.989.
+
+- **environment.yml added alongside requirements.txt** (final polish)
+  → `conda env create -f environment.yml` is the single-command reproduce (README "4 commands"
+  spec); requirements.txt kept as the pip mirror. conda-forge for all but the python-louvain /
+  pyvis / powerlaw trio (pip). Additive — no change to the installed env.
+
+- **kaleido pinned by its pip name, python-kaleido by its conda name** (final polish)
+  → PyPI has no `python-kaleido` (404); the pip package is `kaleido` (1.3.0). requirements.txt
+  uses `kaleido>=1.3.0`; environment.yml's conda block uses `python-kaleido>=1.3`.
+
+- **_quarto.yml site-url → Pages URL** (was the repo URL)
+  → so the sitemap/OG tags resolve to the published site; added a GitHub navbar link.
 
 ---
 
