@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>02 · Centrality &amp; Structure — European Air Transport Network – European Air Transport Network</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b095769728ad29083110b1252ffd6e0a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">European Air Transport Network</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notebooks/01_graph_construction.html"> 
+<span class="menu-text">01 · Graph</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../notebooks/02_centrality_stats.html" aria-current="page"> 
+<span class="menu-text">02 · Centrality</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notebooks/03_community_detection.html"> 
+<span class="menu-text">03 · Communities</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notebooks/04_resilience_analysis.html"> 
+<span class="menu-text">04 · Resilience</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#six-centralities-on-the-directed-graph" id="toc-six-centralities-on-the-directed-graph" class="nav-link active" data-scroll-target="#six-centralities-on-the-directed-graph">1 · Six centralities on the directed graph</a></li>
+  <li><a href="#research-question-1-vienna-among-the-bridges" id="toc-research-question-1-vienna-among-the-bridges" class="nav-link" data-scroll-target="#research-question-1-vienna-among-the-bridges">2 · Research Question 1 — Vienna among the bridges</a>
+  <ul class="collapse">
+  <li><a href="#where-are-frankfurt-heathrow-amsterdam" id="toc-where-are-frankfurt-heathrow-amsterdam" class="nav-link" data-scroll-target="#where-are-frankfurt-heathrow-amsterdam">Where are Frankfurt, Heathrow, Amsterdam?</a></li>
+  <li><a href="#the-proper-test-eastwest-gateway-betweenness" id="toc-the-proper-test-eastwest-gateway-betweenness" class="nav-link" data-scroll-target="#the-proper-test-eastwest-gateway-betweenness">The proper test — East–West gateway betweenness</a></li>
+  <li><a href="#tighter-still-central-eastern-europe-only" id="toc-tighter-still-central-eastern-europe-only" class="nav-link" data-scroll-target="#tighter-still-central-eastern-europe-only">Tighter still — Central-Eastern Europe only</a></li>
+  <li><a href="#reading-research-question-1" id="toc-reading-research-question-1" class="nav-link" data-scroll-target="#reading-research-question-1">Reading Research Question 1</a></li>
+  </ul></li>
+  <li><a href="#is-it-scale-free-the-degree-distribution" id="toc-is-it-scale-free-the-degree-distribution" class="nav-link" data-scroll-target="#is-it-scale-free-the-degree-distribution">3 · Is it scale-free? The degree distribution</a></li>
+  <li><a href="#is-it-a-small-world" id="toc-is-it-a-small-world" class="nav-link" data-scroll-target="#is-it-a-small-world">4 · Is it a small world?</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">02 · Centrality &amp; Structure — European Air Transport Network</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>Data vintage — June 2014.</strong> A frozen OpenFlights route snapshot, <em>not</em> the current network. Every rank and coefficient below describes 2014. The questions here — structural centrality, scale-free structure, small-world geometry — are topological invariants, so a dated snapshot is the standard, defensible choice.</p>
+</blockquote>
+<p><strong>This notebook answers Research Question 1 and characterises the network’s structure.</strong> It:</p>
+<ol type="1">
+<li>Computes six centralities on the <code>DiGraph</code> and writes them back to <code>network.db</code>.</li>
+<li>Ranks airports by <strong>betweenness</strong> — and asks where <strong>Vienna (VIE)</strong> sits (RQ1).</li>
+<li>Probes why the traffic giants (Frankfurt, Heathrow, Amsterdam) are <em>missing</em> from the top of that ranking.</li>
+<li>Tests the East–West bridge hypothesis directly — all-East and Central-Europe-only — with subset betweenness.</li>
+<li>Tests the degree distribution for <strong>scale-free</strong> structure (a Clauset–Shalizi–Newman fit).</li>
+<li>Runs the <strong>small-world</strong> test against an Erdős–Rényi null.</li>
+</ol>
+<p>Analysis logic lives in <code>src/build_graph.py</code> and <code>src/utils.py</code> (imported, not redefined); only the presentation is notebook-specific.</p>
+<div id="nb02-02" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> contextlib <span class="im">import</span> closing</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> powerlaw</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> zeta</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext autoreload</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>autoreload <span class="dv">2</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _find_src() <span class="op">-&gt;</span> Path:</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Locate the repo's src/ dir so imports work regardless of launch cwd."""</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> [Path.cwd(), <span class="op">*</span>Path.cwd().parents]:</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (p <span class="op">/</span> <span class="st">"src"</span> <span class="op">/</span> <span class="st">"build_graph.py"</span>).exists():</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> p <span class="op">/</span> <span class="st">"src"</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">FileNotFoundError</span>(<span class="st">"Could not locate src/ — run this from inside the repo."</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="bu">str</span>(_find_src()))</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> build_graph <span class="im">as</span> bg</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> utils</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">"display.max_columns"</span>, <span class="va">None</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload</code></pre>
+</div>
+</div>
+<section id="six-centralities-on-the-directed-graph" class="level2">
+<h2 class="anchored" data-anchor-id="six-centralities-on-the-directed-graph">1 · Six centralities on the directed graph</h2>
+<p>Edge weight here is the <strong>number of distinct operating carriers</strong> on a route — a <em>service</em> proxy, not a distance and not traffic. That one fact dictates a per-measure choice:</p>
+<ul>
+<li><strong>Betweenness &amp; closeness</strong> read edge weight as a <strong>distance/cost</strong>: a heavier edge becomes <em>longer</em> and <em>less</em> likely to lie on a shortest path. Ours means the opposite (more carriers = more service), so passing it would invert the geometry. Both are computed <strong>unweighted</strong> — shortest path = fewest hops, the topological convention for airport networks (Guimerà &amp; Amaral 2005; Barrat et al.&nbsp;2004) and the one that lines up with NB04’s percolation.</li>
+<li><strong>In/out-degree</strong> are stored as the <strong>unweighted count</strong> of distinct routes (the <code>INTEGER</code> columns are <em>degree</em>, not weighted <em>strength</em>).</li>
+<li><strong>PageRank</strong> runs on the full <code>DiGraph</code>; its damping term absorbs dangling nodes and the small off-giant components cleanly.</li>
+<li><strong>Eigenvector centrality</strong> needs a <em>connected</em> graph with a unique dominant eigenvector (Perron–Frobenius). This <code>DiGraph</code> is neither connected (5 weakly-connected components) nor strongly connected, so <code>eigenvector_centrality_numpy</code> <strong>raises</strong> on it. We compute it on the <strong>undirected giant component</strong> and assign 0 to the off-giant nodes — <code>PageRank</code> carries the directed-influence story.</li>
+</ul>
+<p>On a directed graph, <strong>closeness</strong> measures <em>incoming</em> distance by default (how reachable a node is <em>from</em> the network); reverse the graph for the outbound version.</p>
+<div id="nb02-04" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>digraph, undirected, edges, airports_eu <span class="op">=</span> bg.build_networks()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Unweighted degree = number of distinct routes in / out (the INTEGER columns).</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>in_degree <span class="op">=</span> <span class="bu">dict</span>(digraph.in_degree())</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>out_degree <span class="op">=</span> <span class="bu">dict</span>(digraph.out_degree())</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Topological betweenness &amp; closeness (weight is a service proxy, not a distance).</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>betweenness <span class="op">=</span> nx.betweenness_centrality(digraph, normalized<span class="op">=</span><span class="va">True</span>, weight<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>closeness <span class="op">=</span> nx.closeness_centrality(digraph)          <span class="co"># directed: incoming, wf_improved</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>pagerank <span class="op">=</span> nx.pagerank(digraph, alpha<span class="op">=</span><span class="fl">0.85</span>, weight<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Eigenvector on the undirected giant component (Perron-Frobenius needs a</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># connected graph; the DiGraph is neither connected nor strongly connected).</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>giant_nodes <span class="op">=</span> <span class="bu">max</span>(nx.connected_components(undirected), key<span class="op">=</span><span class="bu">len</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>giant <span class="op">=</span> undirected.subgraph(giant_nodes)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>eig_giant <span class="op">=</span> nx.eigenvector_centrality_numpy(giant, weight<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>eigenvector <span class="op">=</span> {n: <span class="bu">float</span>(eig_giant.get(n, <span class="fl">0.0</span>)) <span class="cf">for</span> n <span class="kw">in</span> digraph.nodes()}</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Graph: </span><span class="sc">{</span>digraph<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss"> nodes, </span><span class="sc">{</span>digraph<span class="sc">.</span>number_of_edges()<span class="sc">}</span><span class="ss"> directed edges"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Eigenvector on giant component: </span><span class="sc">{</span><span class="bu">len</span>(giant_nodes)<span class="sc">}</span><span class="ss"> nodes "</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"(</span><span class="sc">{</span>digraph<span class="sc">.</span>number_of_nodes() <span class="op">-</span> <span class="bu">len</span>(giant_nodes)<span class="sc">}</span><span class="ss"> off-giant set to 0.0)"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Native-typed rows for the SQLite UPDATE (avoids numpy-scalar binding issues).</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>update_rows <span class="op">=</span> [</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"iata"</span>: n,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"in_degree"</span>: <span class="bu">int</span>(in_degree[n]),</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"out_degree"</span>: <span class="bu">int</span>(out_degree[n]),</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"betweenness"</span>: <span class="bu">float</span>(betweenness[n]),</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"closeness"</span>: <span class="bu">float</span>(closeness[n]),</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"eigenvector"</span>: eigenvector[n],</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pagerank"</span>: <span class="bu">float</span>(pagerank[n]),</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> digraph.nodes()</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy frame for inspection, with city/country attached from node attributes.</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>centrality <span class="op">=</span> pd.DataFrame(update_rows)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>meta <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    [{<span class="st">"iata"</span>: n, <span class="st">"city"</span>: d.get(<span class="st">"city"</span>), <span class="st">"country"</span>: d.get(<span class="st">"country"</span>)}</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> n, d <span class="kw">in</span> digraph.nodes(data<span class="op">=</span><span class="va">True</span>)]</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>centrality <span class="op">=</span> meta.merge(centrality, on<span class="op">=</span><span class="st">"iata"</span>)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>centrality[<span class="st">"total_degree"</span>] <span class="op">=</span> centrality[<span class="st">"in_degree"</span>] <span class="op">+</span> centrality[<span class="st">"out_degree"</span>]</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>centrality.sort_values(<span class="st">"betweenness"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Graph: 559 nodes, 10287 directed edges
+Eigenvector on giant component: 544 nodes (15 off-giant set to 0.0)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">iata</th>
+<th data-quarto-table-cell-role="th">city</th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">in_degree</th>
+<th data-quarto-table-cell-role="th">out_degree</th>
+<th data-quarto-table-cell-role="th">betweenness</th>
+<th data-quarto-table-cell-role="th">closeness</th>
+<th data-quarto-table-cell-role="th">eigenvector</th>
+<th data-quarto-table-cell-role="th">pagerank</th>
+<th data-quarto-table-cell-role="th">total_degree</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">3</th>
+<td>IST</td>
+<td>Istanbul</td>
+<td>Turkey</td>
+<td>132</td>
+<td>131</td>
+<td>0.090510</td>
+<td>0.510231</td>
+<td>0.127661</td>
+<td>0.014831</td>
+<td>263</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>ARN</td>
+<td>Stockholm</td>
+<td>Sweden</td>
+<td>98</td>
+<td>99</td>
+<td>0.079698</td>
+<td>0.499066</td>
+<td>0.115786</td>
+<td>0.010908</td>
+<td>197</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>OSL</td>
+<td>Oslo</td>
+<td>Norway</td>
+<td>92</td>
+<td>92</td>
+<td>0.075055</td>
+<td>0.498118</td>
+<td>0.108692</td>
+<td>0.009521</td>
+<td>184</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">61</th>
+<td>ATH</td>
+<td>Athens</td>
+<td>Greece</td>
+<td>91</td>
+<td>93</td>
+<td>0.063812</td>
+<td>0.498118</td>
+<td>0.111576</td>
+<td>0.010133</td>
+<td>184</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">24</th>
+<td>STN</td>
+<td>London</td>
+<td>United Kingdom</td>
+<td>145</td>
+<td>146</td>
+<td>0.054578</td>
+<td>0.479888</td>
+<td>0.118555</td>
+<td>0.012334</td>
+<td>291</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>ORY</td>
+<td>Paris</td>
+<td>France</td>
+<td>89</td>
+<td>89</td>
+<td>0.048162</td>
+<td>0.473819</td>
+<td>0.081858</td>
+<td>0.009081</td>
+<td>178</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">76</th>
+<td>HEL</td>
+<td>Helsinki</td>
+<td>Finland</td>
+<td>61</td>
+<td>61</td>
+<td>0.044369</td>
+<td>0.471689</td>
+<td>0.083001</td>
+<td>0.007742</td>
+<td>122</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>LGW</td>
+<td>London</td>
+<td>United Kingdom</td>
+<td>127</td>
+<td>127</td>
+<td>0.040226</td>
+<td>0.521390</td>
+<td>0.143156</td>
+<td>0.010034</td>
+<td>254</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">20</th>
+<td>DME</td>
+<td>Moscow</td>
+<td>Russia</td>
+<td>77</td>
+<td>78</td>
+<td>0.038443</td>
+<td>0.447159</td>
+<td>0.077897</td>
+<td>0.008176</td>
+<td>155</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>PMI</td>
+<td>Palma de Mallorca</td>
+<td>Spain</td>
+<td>124</td>
+<td>124</td>
+<td>0.038265</td>
+<td>0.489289</td>
+<td>0.126709</td>
+<td>0.010138</td>
+<td>248</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The <code>nodes</code> table already holds all 559 airports with NULL centrality columns — <code>schema.sql</code> pre-declared them, so we <code>UPDATE</code> in place (no <code>ALTER TABLE</code>), matched on <code>iata</code>. The write is idempotent; re-running overwrites. We confirm by counting non-NULL <code>betweenness</code>, which jumps from 0 to 559.</p>
+<div id="nb02-06" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>UPDATE_CENTRALITY <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">    UPDATE nodes</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">       SET in_degree   = :in_degree,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">           out_degree  = :out_degree,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">           betweenness = :betweenness,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">           closeness   = :closeness,</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">           eigenvector = :eigenvector,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">           pagerank    = :pagerank</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">     WHERE iata = :iata</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> closing(sqlite3.<span class="ex">connect</span>(utils.DB_PATH)) <span class="im">as</span> conn:</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    conn.execute(<span class="st">"PRAGMA foreign_keys = ON"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    conn.executemany(UPDATE_CENTRALITY, update_rows)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    conn.commit()</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    scored <span class="op">=</span> pd.read_sql(<span class="st">"SELECT COUNT(betweenness) AS n FROM nodes"</span>, conn).at[<span class="dv">0</span>, <span class="st">"n"</span>]</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"nodes with centrality written: </span><span class="sc">{</span>scored<span class="sc">}</span><span class="ss"> (expect </span><span class="sc">{</span>digraph<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> scored <span class="op">==</span> digraph.number_of_nodes(), <span class="st">"some nodes were not updated"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>nodes with centrality written: 559 (expect 559)</code></pre>
+</div>
+</div>
+</section>
+<section id="research-question-1-vienna-among-the-bridges" class="level2">
+<h2 class="anchored" data-anchor-id="research-question-1-vienna-among-the-bridges">2 · Research Question 1 — Vienna among the bridges</h2>
+<p><strong>Betweenness centrality</strong> counts how many shortest paths between <em>other</em> airports run through a node — the <strong>structural-bridge</strong> measure. A high-betweenness node is a bottleneck: remove it and once-adjacent regions fall far apart.</p>
+<p>We rank airports by betweenness, restricted to countries with <strong>more than five airports</strong> in the graph, so the ranking reflects well-sampled national systems rather than single-airport countries. The query is version-controlled at <code>sql/queries/top_airports_by_betweenness.sql</code></p>
+<div id="nb02-08" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>query_path <span class="op">=</span> utils.SQL_QUERIES_DIR <span class="op">/</span> <span class="st">"top_airports_by_betweenness.sql"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sql <span class="op">=</span> query_path.read_text(encoding<span class="op">=</span><span class="st">"utf-8"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> closing(sqlite3.<span class="ex">connect</span>(utils.DB_PATH)) <span class="im">as</span> conn:</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    ranked <span class="op">=</span> pd.read_sql(sql, conn)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>vie <span class="op">=</span> ranked.loc[ranked[<span class="st">"is_vienna"</span>] <span class="op">==</span> <span class="dv">1</span>].iloc[<span class="dv">0</span>]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Vienna (VIE) betweenness rank: </span><span class="sc">{</span><span class="bu">int</span>(vie[<span class="st">'betweenness_rank'</span>])<span class="sc">}</span><span class="ss"> "</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"of </span><span class="sc">{</span><span class="bu">len</span>(ranked)<span class="sc">}</span><span class="ss"> airports in countries with &gt;5 airports "</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"(betweenness = </span><span class="sc">{</span>vie[<span class="st">'betweenness'</span>]<span class="sc">:.6f}</span><span class="ss">)."</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ranked.head(<span class="dv">15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Vienna (VIE) betweenness rank: 40 of 479 airports in countries with &gt;5 airports (betweenness = 0.010577).</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">betweenness_rank</th>
+<th data-quarto-table-cell-role="th">airport_code</th>
+<th data-quarto-table-cell-role="th">airport_name</th>
+<th data-quarto-table-cell-role="th">city</th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">betweenness</th>
+<th data-quarto-table-cell-role="th">is_vienna</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1</td>
+<td>IST</td>
+<td>Istanbul Airport</td>
+<td>Istanbul</td>
+<td>Turkey</td>
+<td>0.090510</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2</td>
+<td>ARN</td>
+<td>Stockholm-Arlanda Airport</td>
+<td>Stockholm</td>
+<td>Sweden</td>
+<td>0.079698</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>3</td>
+<td>OSL</td>
+<td>Oslo Lufthavn</td>
+<td>Oslo</td>
+<td>Norway</td>
+<td>0.075055</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>4</td>
+<td>ATH</td>
+<td>Eleftherios Venizelos International Airport</td>
+<td>Athens</td>
+<td>Greece</td>
+<td>0.063812</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>5</td>
+<td>STN</td>
+<td>London Stansted Airport</td>
+<td>London</td>
+<td>United Kingdom</td>
+<td>0.054578</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>6</td>
+<td>ORY</td>
+<td>Paris-Orly Airport</td>
+<td>Paris</td>
+<td>France</td>
+<td>0.048162</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>7</td>
+<td>HEL</td>
+<td>Helsinki Vantaa Airport</td>
+<td>Helsinki</td>
+<td>Finland</td>
+<td>0.044369</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>8</td>
+<td>LGW</td>
+<td>London Gatwick Airport</td>
+<td>London</td>
+<td>United Kingdom</td>
+<td>0.040226</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>9</td>
+<td>DME</td>
+<td>Domodedovo International Airport</td>
+<td>Moscow</td>
+<td>Russia</td>
+<td>0.038443</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>10</td>
+<td>PMI</td>
+<td>Palma De Mallorca Airport</td>
+<td>Palma de Mallorca</td>
+<td>Spain</td>
+<td>0.038265</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>11</td>
+<td>SAW</td>
+<td>Sabiha Gökçen International Airport</td>
+<td>Istanbul</td>
+<td>Turkey</td>
+<td>0.035576</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>12</td>
+<td>BCN</td>
+<td>Barcelona International Airport</td>
+<td>Barcelona</td>
+<td>Spain</td>
+<td>0.032325</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>13</td>
+<td>TOS</td>
+<td>Tromsø Airport,</td>
+<td>Tromso</td>
+<td>Norway</td>
+<td>0.031915</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>14</td>
+<td>ALC</td>
+<td>Alicante International Airport</td>
+<td>Alicante</td>
+<td>Spain</td>
+<td>0.029452</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>15</td>
+<td>CPH</td>
+<td>Copenhagen Kastrup Airport</td>
+<td>Copenhagen</td>
+<td>Denmark</td>
+<td>0.028678</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<section id="where-are-frankfurt-heathrow-amsterdam" class="level3">
+<h3 class="anchored" data-anchor-id="where-are-frankfurt-heathrow-amsterdam">Where are Frankfurt, Heathrow, Amsterdam?</h3>
+<p>The top of that ranking is dominated by <strong>peripheral gateways</strong> — Istanbul, the Nordic capitals, Athens, Moscow, the Spanish leisure airports — while the traffic giants are absent. This is not a bug; it is the defining behaviour of betweenness, and it echoes NB01, where <em>degree</em> already surfaced low-cost bases over legacy hubs.</p>
+<p>Two effects combine. First, a <strong>super-hub is an endpoint, not an intermediary</strong>: Frankfurt connects directly to hundreds of airports, so paths <em>terminate</em> at it rather than <em>pass through</em> it — and betweenness counts only pass-through. Second, the network’s <strong>periphery is tree-like</strong> (small Nordic, Aegean, and island airports hang off a single regional gateway), so every path in or out of those regions is <em>forced</em> through the gateway, inflating its betweenness. Guimerà &amp; Amaral (2005) found exactly this worldwide — Anchorage outranks the mega-hubs.</p>
+<p>The table below is the check: the legacy hubs carry high <em>degree</em> but middling <em>betweenness</em>. If they instead showed low degree, that would signal a data fault — they don’t.</p>
+<div id="nb02-10" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Global ranks over all 559 nodes (distinct from the &gt;5-country pool above).</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>centrality[<span class="st">"betweenness_rank"</span>] <span class="op">=</span> centrality[<span class="st">"betweenness"</span>].rank(ascending<span class="op">=</span><span class="va">False</span>, method<span class="op">=</span><span class="st">"min"</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>centrality[<span class="st">"degree_rank"</span>] <span class="op">=</span> centrality[<span class="st">"total_degree"</span>].rank(ascending<span class="op">=</span><span class="va">False</span>, method<span class="op">=</span><span class="st">"min"</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>WATCH <span class="op">=</span> [<span class="st">"FRA"</span>, <span class="st">"LHR"</span>, <span class="st">"CDG"</span>, <span class="st">"AMS"</span>, <span class="st">"MUC"</span>, <span class="st">"STN"</span>, <span class="st">"IST"</span>, <span class="st">"VIE"</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>present <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> WATCH <span class="cf">if</span> c <span class="kw">in</span> <span class="bu">set</span>(centrality[<span class="st">"iata"</span>])]</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">"city"</span>, <span class="st">"country"</span>, <span class="st">"total_degree"</span>, <span class="st">"degree_rank"</span>, <span class="st">"betweenness"</span>, <span class="st">"betweenness_rank"</span>]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>diagnostic <span class="op">=</span> centrality.set_index(<span class="st">"iata"</span>).loc[present, cols]</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>diagnostic.<span class="bu">round</span>(<span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">city</th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">total_degree</th>
+<th data-quarto-table-cell-role="th">degree_rank</th>
+<th data-quarto-table-cell-role="th">betweenness</th>
+<th data-quarto-table-cell-role="th">betweenness_rank</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">iata</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">FRA</th>
+<td>Frankfurt</td>
+<td>Germany</td>
+<td>233</td>
+<td>8</td>
+<td>0.017798</td>
+<td>26</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">LHR</th>
+<td>London</td>
+<td>United Kingdom</td>
+<td>160</td>
+<td>27</td>
+<td>0.008609</td>
+<td>49</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">CDG</th>
+<td>Paris</td>
+<td>France</td>
+<td>246</td>
+<td>7</td>
+<td>0.024491</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">AMS</th>
+<td>Amsterdam</td>
+<td>Netherlands</td>
+<td>258</td>
+<td>4</td>
+<td>0.026076</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">MUC</th>
+<td>Munich</td>
+<td>Germany</td>
+<td>225</td>
+<td>10</td>
+<td>0.019292</td>
+<td>24</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">STN</th>
+<td>London</td>
+<td>United Kingdom</td>
+<td>291</td>
+<td>1</td>
+<td>0.054578</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">IST</th>
+<td>Istanbul</td>
+<td>Turkey</td>
+<td>263</td>
+<td>3</td>
+<td>0.090510</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">VIE</th>
+<td>Vienna</td>
+<td>Austria</td>
+<td>156</td>
+<td>29</td>
+<td>0.010577</td>
+<td>42</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="the-proper-test-eastwest-gateway-betweenness" class="level3">
+<h3 class="anchored" data-anchor-id="the-proper-test-eastwest-gateway-betweenness">The proper test — East–West gateway betweenness</h3>
+<p>Global betweenness rewards the periphery, and Vienna sits in the dense continental core — so its rank says little about the specific claim in RQ1: that VIE bridges <em>Eastern</em> and <em>Western</em> Europe. That is a <strong>conditional</strong> question — of the shortest paths running from an Eastern airport to a Western one, how many pass through VIE? — and it needs <strong>subset betweenness</strong>, counting East↔︎West paths only.</p>
+<p>We split airports by the Cold-War-era divide: <strong>East</strong> = the former Eastern-bloc, USSR, and Yugoslav successor states; <strong>West</strong> = everything else in the giant component. The partition is a modelling choice, stated here so it can be adjusted (Turkey, straddling the line, is left in the West). We then rank every airport by the East–West shortest paths it carries, and compare Vienna’s position here with its global rank.</p>
+<div id="nb02-12" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>EAST_COUNTRIES <span class="op">=</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Poland"</span>, <span class="st">"Czech Republic"</span>, <span class="st">"Slovakia"</span>, <span class="st">"Hungary"</span>, <span class="st">"Romania"</span>, <span class="st">"Bulgaria"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Croatia"</span>, <span class="st">"Slovenia"</span>, <span class="st">"Serbia"</span>, <span class="st">"Bosnia and Herzegovina"</span>, <span class="st">"Montenegro"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Macedonia"</span>, <span class="st">"Albania"</span>, <span class="st">"Kosovo"</span>, <span class="st">"Estonia"</span>, <span class="st">"Latvia"</span>, <span class="st">"Lithuania"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Belarus"</span>, <span class="st">"Ukraine"</span>, <span class="st">"Moldova"</span>, <span class="st">"Russia"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>country_of <span class="op">=</span> nx.get_node_attributes(digraph, <span class="st">"country"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>east <span class="op">=</span> [n <span class="cf">for</span> n <span class="kw">in</span> giant.nodes() <span class="cf">if</span> country_of.get(n) <span class="kw">in</span> EAST_COUNTRIES]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>west <span class="op">=</span> [n <span class="cf">for</span> n <span class="kw">in</span> giant.nodes() <span class="cf">if</span> country_of.get(n) <span class="kw">not</span> <span class="kw">in</span> EAST_COUNTRIES]</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Giant component: </span><span class="sc">{</span><span class="bu">len</span>(east)<span class="sc">}</span><span class="ss"> Eastern airports, </span><span class="sc">{</span><span class="bu">len</span>(west)<span class="sc">}</span><span class="ss"> Western airports"</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset betweenness over undirected East&lt;-&gt;West shortest paths.</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>ew <span class="op">=</span> nx.betweenness_centrality_subset(giant, sources<span class="op">=</span>east, targets<span class="op">=</span>west,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                                      normalized<span class="op">=</span><span class="va">True</span>, weight<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>gateways <span class="op">=</span> centrality.set_index(<span class="st">"iata"</span>).assign(ew_betweenness<span class="op">=</span>pd.Series(ew))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>ew_rank <span class="op">=</span> gateways[<span class="st">"ew_betweenness"</span>].rank(ascending<span class="op">=</span><span class="va">False</span>, method<span class="op">=</span><span class="st">"min"</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>r_ew <span class="op">=</span> <span class="bu">int</span>(ew_rank.loc[<span class="st">"VIE"</span>])</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>r_global <span class="op">=</span> <span class="bu">int</span>(gateways.loc[<span class="st">"VIE"</span>, <span class="st">"betweenness_rank"</span>])</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>verdict <span class="op">=</span> (<span class="st">"its structural importance is specifically East–West"</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>           <span class="cf">if</span> r_ew <span class="op">&lt;</span> r_global <span class="cf">else</span> <span class="st">"it is one of several East–West gateways"</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Vienna: global betweenness rank </span><span class="sc">{</span>r_global<span class="sc">}</span><span class="ss"> -&gt; East–West rank </span><span class="sc">{</span>r_ew<span class="sc">}</span><span class="ss">; </span><span class="sc">{</span>verdict<span class="sc">}</span><span class="ss">."</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>gateways.sort_values(<span class="st">"ew_betweenness"</span>, ascending<span class="op">=</span><span class="va">False</span>)[</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"city"</span>, <span class="st">"country"</span>, <span class="st">"ew_betweenness"</span>]].head(<span class="dv">10</span>).<span class="bu">round</span>(<span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Giant component: 101 Eastern airports, 443 Western airports
+Vienna: global betweenness rank 42 -&gt; East–West rank 42; it is one of several East–West gateways.</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">city</th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">ew_betweenness</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">iata</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">DME</th>
+<td>Moscow</td>
+<td>Russia</td>
+<td>0.014001</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">IST</th>
+<td>Istanbul</td>
+<td>Turkey</td>
+<td>0.013171</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">STN</th>
+<td>London</td>
+<td>United Kingdom</td>
+<td>0.010163</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">OSL</th>
+<td>Oslo</td>
+<td>Norway</td>
+<td>0.009593</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">SVO</th>
+<td>Moscow</td>
+<td>Russia</td>
+<td>0.009309</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">ARN</th>
+<td>Stockholm</td>
+<td>Sweden</td>
+<td>0.008370</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">LED</th>
+<td>St. Petersburg</td>
+<td>Russia</td>
+<td>0.007652</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">ATH</th>
+<td>Athens</td>
+<td>Greece</td>
+<td>0.007072</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">OTP</th>
+<td>Bucharest</td>
+<td>Romania</td>
+<td>0.006389</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">HEL</th>
+<td>Helsinki</td>
+<td>Finland</td>
+<td>0.006322</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="tighter-still-central-eastern-europe-only" class="level3">
+<h3 class="anchored" data-anchor-id="tighter-still-central-eastern-europe-only">Tighter still — Central-Eastern Europe only</h3>
+<p>Vienna does not move on the all-East test. Before concluding, we sharpen the definition: in aviation “Eastern Europe” usually means <strong>Central-Eastern Europe</strong> — the EU-accession and Balkan states — <em>not</em> the former USSR, whose Moscow-centred domestic flows dominate the all-East ranking and swamp Vienna’s specific role. This is the fairest test of the hypothesis: of the shortest paths from a CEE airport to anywhere else, how many run through VIE?</p>
+<div id="nb02-14" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>CEE_COUNTRIES <span class="op">=</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Poland"</span>, <span class="st">"Czech Republic"</span>, <span class="st">"Slovakia"</span>, <span class="st">"Hungary"</span>, <span class="st">"Slovenia"</span>, <span class="st">"Croatia"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Romania"</span>, <span class="st">"Bulgaria"</span>, <span class="st">"Serbia"</span>, <span class="st">"Bosnia and Herzegovina"</span>, <span class="st">"Montenegro"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Macedonia"</span>, <span class="st">"Albania"</span>, <span class="st">"Kosovo"</span>, <span class="st">"Estonia"</span>, <span class="st">"Latvia"</span>, <span class="st">"Lithuania"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>cee <span class="op">=</span> [n <span class="cf">for</span> n <span class="kw">in</span> giant.nodes() <span class="cf">if</span> country_of.get(n) <span class="kw">in</span> CEE_COUNTRIES]</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>rest <span class="op">=</span> [n <span class="cf">for</span> n <span class="kw">in</span> giant.nodes() <span class="cf">if</span> country_of.get(n) <span class="kw">not</span> <span class="kw">in</span> CEE_COUNTRIES]</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ew_cee <span class="op">=</span> nx.betweenness_centrality_subset(giant, sources<span class="op">=</span>cee, targets<span class="op">=</span>rest,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                                          normalized<span class="op">=</span><span class="va">True</span>, weight<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>cee_rank <span class="op">=</span> pd.Series(ew_cee).rank(ascending<span class="op">=</span><span class="va">False</span>, method<span class="op">=</span><span class="st">"min"</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(cee)<span class="sc">}</span><span class="ss"> CEE airports in the giant component"</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Vienna CEE-gateway betweenness rank: </span><span class="sc">{</span><span class="bu">int</span>(cee_rank.loc[<span class="st">'VIE'</span>])<span class="sc">}</span><span class="ss"> of </span><span class="sc">{</span>giant<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>(pd.Series(ew_cee, name<span class="op">=</span><span class="st">"cee_betweenness"</span>).to_frame()</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>   .join(centrality.set_index(<span class="st">"iata"</span>)[[<span class="st">"city"</span>, <span class="st">"country"</span>]])</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>   .sort_values(<span class="st">"cee_betweenness"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>).<span class="bu">round</span>(<span class="dv">6</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>61 CEE airports in the giant component
+Vienna CEE-gateway betweenness rank: 45 of 544</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">cee_betweenness</th>
+<th data-quarto-table-cell-role="th">city</th>
+<th data-quarto-table-cell-role="th">country</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">STN</th>
+<td>0.009474</td>
+<td>London</td>
+<td>United Kingdom</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">IST</th>
+<td>0.007889</td>
+<td>Istanbul</td>
+<td>Turkey</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">OTP</th>
+<td>0.006660</td>
+<td>Bucharest</td>
+<td>Romania</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">OSL</th>
+<td>0.005958</td>
+<td>Oslo</td>
+<td>Norway</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">ARN</th>
+<td>0.005103</td>
+<td>Stockholm</td>
+<td>Sweden</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">BGY</th>
+<td>0.005001</td>
+<td>Bergamo</td>
+<td>Italy</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">LTN</th>
+<td>0.004554</td>
+<td>London</td>
+<td>United Kingdom</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">HEL</th>
+<td>0.004249</td>
+<td>Helsinki</td>
+<td>Finland</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">ATH</th>
+<td>0.004051</td>
+<td>Athens</td>
+<td>Greece</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">DUB</th>
+<td>0.003396</td>
+<td>Dublin</td>
+<td>Ireland</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="reading-research-question-1" class="level3">
+<h3 class="anchored" data-anchor-id="reading-research-question-1">Reading Research Question 1</h3>
+<p>Three betweenness lenses — global, all-East, and CEE-only — put Vienna at ranks <strong>42, 42, and 45</strong>. The hypothesis that VIE is <em>the</em> East–West bridge is <strong>not supported by the 2014 operating-carrier network</strong>. That is a real result, not a null one, and it has a clear cause: by 2014 the <strong>low-cost carriers had already rewired Central-European connectivity to point-to-point</strong>. The airports that actually carry CEE-to-elsewhere shortest paths are Ryanair/Wizz/easyJet bases — Stansted, Bergamo, Luton, Dublin — alongside the regional aggregator Bucharest, not the legacy alliance hubs.</p>
+<p>Two caveats sharpen rather than soften this. First, our <strong>codeshare filter removes exactly the Star Alliance feed</strong> that Austrian Airlines used to funnel CEE traffic through Vienna — so VIE’s <em>marketed</em> gateway role is partly invisible by construction, and that is the honest limitation to name in the README. Second, betweenness measures <strong>structural bottleneck-ness</strong>, not traffic or revenue: Vienna can be a large, profitable hub (it was) while still not being a shortest-path bottleneck. The Austrian angle survives, but as a nuance — <em>structural centrality and commercial importance are different things</em> — the same lesson NB01’s degree ranking first flagged.</p>
+</section>
+</section>
+<section id="is-it-scale-free-the-degree-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="is-it-scale-free-the-degree-distribution">3 · Is it scale-free? The degree distribution</h2>
+<p>A <strong>scale-free</strong> network has a heavy, power-law degree tail, P(k) ∝ k^(−α) — hubs of every size, no characteristic scale. Testing this properly means more than drawing a line through a log-log plot, which is statistically unsound: binning P(k) discards tail data, and OLS on a CCDF is biased. We use the <strong>Clauset–Shalizi–Newman</strong> procedure via the <code>powerlaw</code> package — maximum-likelihood α with the lower cutoff k_min chosen by KS minimisation — then a <strong>likelihood-ratio test</strong> of the power law against a log-normal and a truncated power law. A network is only “scale-free” if the power law genuinely beats those alternatives.</p>
+<div id="nb02-17" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>degrees <span class="op">=</span> np.array([d <span class="cf">for</span> _, d <span class="kw">in</span> giant.degree()])</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> warnings.catch_warnings():</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    warnings.simplefilter(<span class="st">"ignore"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    fit <span class="op">=</span> powerlaw.Fit(degrees, discrete<span class="op">=</span><span class="va">True</span>, verbose<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    R_ln, p_ln <span class="op">=</span> fit.distribution_compare(<span class="st">"power_law"</span>, <span class="st">"lognormal"</span>, normalized_ratio<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    R_tp, p_tp <span class="op">=</span> fit.distribution_compare(<span class="st">"power_law"</span>, <span class="st">"truncated_power_law"</span>, normalized_ratio<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>alpha, kmin <span class="op">=</span> fit.power_law.alpha, <span class="bu">int</span>(fit.power_law.xmin)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>n_tail <span class="op">=</span> <span class="bu">int</span>((degrees <span class="op">&gt;=</span> kmin).<span class="bu">sum</span>())</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Naive OLS slope on the log-log CCDF — the biased estimator, for contrast only.</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>uniq <span class="op">=</span> np.sort(np.unique(degrees))</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>ccdf <span class="op">=</span> np.array([(degrees <span class="op">&gt;=</span> k).mean() <span class="cf">for</span> k <span class="kw">in</span> uniq])</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> uniq <span class="op">&gt;=</span> kmin</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>ols <span class="op">=</span> stats.linregress(np.log(uniq[mask]), np.log(ccdf[mask]))</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _verdict(name, R, p):</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> p <span class="op">&gt;=</span> <span class="fl">0.05</span>:</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"  vs </span><span class="sc">{</span>name<span class="sc">:20s}</span><span class="ss">: indistinguishable (R = </span><span class="sc">{</span>R<span class="sc">:+.2f}</span><span class="ss">, p = </span><span class="sc">{</span>p<span class="sc">:.2f}</span><span class="ss">)"</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    winner <span class="op">=</span> <span class="st">"power law"</span> <span class="cf">if</span> R <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> name</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"  vs </span><span class="sc">{</span>name<span class="sc">:20s}</span><span class="ss">: </span><span class="sc">{</span>winner<span class="sc">}</span><span class="ss"> favoured (R = </span><span class="sc">{</span>R<span class="sc">:+.2f}</span><span class="ss">, p = </span><span class="sc">{</span>p<span class="sc">:.3f}</span><span class="ss">)"</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MLE power law:  α = </span><span class="sc">{</span>alpha<span class="sc">:.2f}</span><span class="ss">,  k_min = </span><span class="sc">{</span>kmin<span class="sc">}</span><span class="ss">,  tail n = </span><span class="sc">{</span>n_tail<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Naive OLS CCDF slope = </span><span class="sc">{</span>ols<span class="sc">.</span>slope<span class="sc">:.2f}</span><span class="ss">  (biased; implied α ≈ </span><span class="sc">{</span><span class="dv">1</span> <span class="op">-</span> ols<span class="sc">.</span>slope<span class="sc">:.2f}</span><span class="ss"> — why we use MLE)"</span>)</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Likelihood-ratio tests (Clauset-Shalizi-Newman):"</span>)</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(_verdict(<span class="st">"lognormal"</span>, R_ln, p_ln))</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(_verdict(<span class="st">"truncated power law"</span>, R_tp, p_tp))</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Log-log CCDF plot in the project palette (dark 'aviation at night' theme).</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>fig.patch.set_facecolor(utils.COLORS[<span class="st">"bg"</span>])</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>ax.set_facecolor(utils.COLORS[<span class="st">"bg"</span>])</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>ax.loglog(uniq, ccdf, <span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">5</span>, color<span class="op">=</span>utils.COLORS[<span class="st">"node_high"</span>],</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>          alpha<span class="op">=</span><span class="fl">0.85</span>, label<span class="op">=</span><span class="st">"Empirical CCDF"</span>)</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>kk <span class="op">=</span> np.linspace(kmin, degrees.<span class="bu">max</span>(), <span class="dv">100</span>)</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>fit_line <span class="op">=</span> (zeta(alpha, kk) <span class="op">/</span> zeta(alpha, kmin)) <span class="op">*</span> ccdf[uniq <span class="op">&gt;=</span> kmin][<span class="dv">0</span>]</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>ax.loglog(kk, fit_line, <span class="st">"-"</span>, color<span class="op">=</span>utils.COLORS[<span class="st">"vienna"</span>], lw<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>          label<span class="op">=</span><span class="ss">f"MLE power law, α = </span><span class="sc">{</span>alpha<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>ax.axvline(kmin, color<span class="op">=</span>utils.COLORS[<span class="st">"coastline"</span>], ls<span class="op">=</span><span class="st">"--"</span>, lw<span class="op">=</span><span class="dv">1</span>, label<span class="op">=</span><span class="ss">f"k_min = </span><span class="sc">{</span>kmin<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Degree  k"</span>)</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"P(K ≥ k)"</span>)</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Degree distribution — European air network (2014)"</span>)</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> spine <span class="kw">in</span> ax.spines.values():</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    spine.set_color(utils.COLORS[<span class="st">"coastline"</span>])</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>ax.tick_params(colors<span class="op">=</span>utils.COLORS[<span class="st">"text"</span>])</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>ax.xaxis.label.set_color(utils.COLORS[<span class="st">"text"</span>])</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>ax.yaxis.label.set_color(utils.COLORS[<span class="st">"text"</span>])</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>ax.title.set_color(utils.COLORS[<span class="st">"text"</span>])</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">"both"</span>, color<span class="op">=</span>utils.COLORS[<span class="st">"coastline"</span>], alpha<span class="op">=</span><span class="fl">0.25</span>, lw<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>ax.legend(facecolor<span class="op">=</span>utils.COLORS[<span class="st">"land"</span>], edgecolor<span class="op">=</span>utils.COLORS[<span class="st">"coastline"</span>],</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>          labelcolor<span class="op">=</span>utils.COLORS[<span class="st">"text"</span>], fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>utils.save_fig_png(fig, <span class="st">"degree_distribution"</span>)</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>MLE power law:  α = 1.59,  k_min = 3,  tail n = 393
+Naive OLS CCDF slope = -1.21  (biased; implied α ≈ 2.21 — why we use MLE)
+Likelihood-ratio tests (Clauset-Shalizi-Newman):
+  vs lognormal           : lognormal favoured (R = -5.69, p = 0.000)
+  vs truncated power law : truncated power law favoured (R = -6.99, p = 0.000)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_centrality_stats_files/figure-html/cell-9-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The likelihood-ratio tests are the verdict. A <strong>negative R with a small p favours the alternative</strong> over the pure power law — and for a physical infrastructure network we expect exactly that: an airport cannot grow unbounded runways, so the largest hubs are capped and the tail bends, making a <strong>log-normal or truncated power law</strong> the better description. This is precisely what Guimerà &amp; Amaral (2005) and Barrat et al.&nbsp;(2004) report for real air networks. The honest headline is <strong>broad-scale and heavy-tailed, not textbook scale-free</strong> — yet still hub-dominated enough to make NB04’s resilience contrast sharp. (If R comes back insignificant, the data simply cannot separate the two at n ≈ 540 — a short-tail limitation, not proof of a clean power law.)</p>
+</section>
+<section id="is-it-a-small-world" class="level2">
+<h2 class="anchored" data-anchor-id="is-it-a-small-world">4 · Is it a small world?</h2>
+<p>A <strong>small-world</strong> network combines two properties usually in tension: <strong>high local clustering</strong> (your neighbours know each other) and <strong>short global path length</strong> (everyone is a few hops away). We quantify it with the Watts–Strogatz σ coefficient, comparing the giant component against an Erdős–Rényi random graph of the same size and density:</p>
+<p><span class="math display">\[\sigma = \frac{C / C_{\text{rand}}}{L / L_{\text{rand}}}\]</span></p>
+<p>C is the average clustering coefficient, L the average shortest-path length; C_rand and L_rand come from an ensemble of ER graphs. <strong>σ ≫ 1</strong> is the small-world signature — clustering far above random while path length stays near random.</p>
+<div id="nb02-20" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>N_RAND <span class="op">=</span> <span class="dv">20</span>   <span class="co"># ER realisations to average the null over</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> nx.average_clustering(giant)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> nx.average_shortest_path_length(giant)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>n, m <span class="op">=</span> giant.number_of_nodes(), giant.number_of_edges()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> m <span class="op">/</span> (n <span class="op">*</span> (n <span class="op">-</span> <span class="dv">1</span>))</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>C_rand, L_rand <span class="op">=</span> [], []</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(N_RAND):</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    R <span class="op">=</span> nx.gnp_random_graph(n, p, seed<span class="op">=</span><span class="bu">int</span>(rng.integers(<span class="dv">1_000_000_000</span>)))</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    R <span class="op">=</span> R.subgraph(<span class="bu">max</span>(nx.connected_components(R), key<span class="op">=</span><span class="bu">len</span>))</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    C_rand.append(nx.average_clustering(R))</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    L_rand.append(nx.average_shortest_path_length(R))</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>C_rand, L_rand <span class="op">=</span> <span class="bu">float</span>(np.mean(C_rand)), <span class="bu">float</span>(np.mean(L_rand))</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> (C <span class="op">/</span> C_rand) <span class="op">/</span> (L <span class="op">/</span> L_rand)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Giant component: n = </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">, m = </span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">, density p = </span><span class="sc">{</span>p<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  clustering   C = </span><span class="sc">{</span>C<span class="sc">:.3f}</span><span class="ss">   (random C_rand = </span><span class="sc">{</span>C_rand<span class="sc">:.3f}</span><span class="ss">)"</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  path length  L = </span><span class="sc">{</span>L<span class="sc">:.2f}</span><span class="ss">    (random L_rand = </span><span class="sc">{</span>L_rand<span class="sc">:.2f}</span><span class="ss">)"</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  small-world  σ = </span><span class="sc">{</span>sigma<span class="sc">:.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Giant component: n = 544, m = 5190, density p = 0.035
+  clustering   C = 0.421   (random C_rand = 0.035)
+  path length  L = 2.71    (random L_rand = 2.46)
+  small-world  σ = 10.9</code></pre>
+</div>
+</div>
+<p>σ ≈ 11 confirms the <strong>small-world</strong> regime: clustering (C = 0.42) runs an order of magnitude above the random null (0.035) — regional cliques where every airport connects to its neighbours (the Aegean, the Baltic, the Iberian leisure market) — while the average trip is still just <strong>~2.7 hops</strong>, barely above random. This is the structural precondition for NB04’s headline: short paths mean the network <em>depends</em> on its hubs to stay compact, which is exactly why removing them in decreasing-degree order collapses it so fast.</p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p><strong>What we built.</strong> Six centralities for all 559 airports, persisted to <code>network.db</code>; a version-controlled betweenness ranking; the East–West and CEE-specific bridge tests; and the network’s structural fingerprint — a CSN degree-tail fit and the small-world σ.</p>
+<p><strong>What stood out.</strong> Betweenness rewards <strong>intermediaries, not endpoints</strong>, so the ranking is topped by peripheral gateways and low-cost bases (Istanbul, the Nordics, Stansted) while the traffic giants sit lower. <strong>Vienna is a mid-tier hub — ranks 42 / 42 / 45 on the global, all-East, and CEE tests — not the East–West bridge the hypothesis expected</strong>: the LCCs had already rewired CEE connectivity point-to-point by 2014, and the codeshare filter hides Vienna’s alliance feed. Structurally the network is <strong>heavy-tailed but not textbook scale-free</strong> (power law loses to log-normal / truncated in the LLR test) and firmly <strong>small-world</strong> (σ ≈ 11 — clustering 12× random, paths ~2.7 hops).</p>
+<p><strong>Next — <code>03_community_detection.ipynb</code>.</strong> Louvain community detection on the undirected graph: do natural aviation communities emerge, and do they follow country borders? Map them, measure modularity Q, and name the dominant country per community with SQL.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/github\.com\/fatemeh-studio\/eu-air-transport-network");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -8,12 +8,9 @@ project:
     - notebooks/03_community_detection.ipynb
     - notebooks/04_resilience_analysis.ipynb
 
-execute:
-  enabled: true
-
 website:
   title: "European Air Transport Network"
-  site-url: "https://<your-username>.github.io/eu-air-transport-network"
+  site-url: "https://github.com/fatemeh-studio/eu-air-transport-network"
   navbar:
     left:
       - { href: index.qmd, text: Home }

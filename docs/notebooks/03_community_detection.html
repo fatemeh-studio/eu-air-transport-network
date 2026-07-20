@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>03 · Community Detection — European Air Transport Network – European Air Transport Network</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b095769728ad29083110b1252ffd6e0a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">European Air Transport Network</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notebooks/01_graph_construction.html"> 
+<span class="menu-text">01 · Graph</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notebooks/02_centrality_stats.html"> 
+<span class="menu-text">02 · Centrality</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../notebooks/03_community_detection.html" aria-current="page"> 
+<span class="menu-text">03 · Communities</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notebooks/04_resilience_analysis.html"> 
+<span class="menu-text">04 · Resilience</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-undirected-giant-component" id="toc-the-undirected-giant-component" class="nav-link active" data-scroll-target="#the-undirected-giant-component">1 · The undirected giant component</a></li>
+  <li><a href="#resolution-sweep-how-many-communities" id="toc-resolution-sweep-how-many-communities" class="nav-link" data-scroll-target="#resolution-sweep-how-many-communities">2 · Resolution sweep — how many communities?</a>
+  <ul class="collapse">
+  <li><a href="#the-chosen-partition" id="toc-the-chosen-partition" class="nav-link" data-scroll-target="#the-chosen-partition">The chosen partition</a></li>
+  </ul></li>
+  <li><a href="#writing-communities-to-the-database" id="toc-writing-communities-to-the-database" class="nav-link" data-scroll-target="#writing-communities-to-the-database">3 · Writing communities to the database</a></li>
+  <li><a href="#do-communities-follow-country-borders" id="toc-do-communities-follow-country-borders" class="nav-link" data-scroll-target="#do-communities-follow-country-borders">4 · Do communities follow country borders?</a>
+  <ul class="collapse">
+  <li><a href="#reading-research-question-2" id="toc-reading-research-question-2" class="nav-link" data-scroll-target="#reading-research-question-2">Reading Research Question 2</a></li>
+  </ul></li>
+  <li><a href="#mapping-the-communities" id="toc-mapping-the-communities" class="nav-link" data-scroll-target="#mapping-the-communities">5 · Mapping the communities</a></li>
+  <li><a href="#the-force-directed-view" id="toc-the-force-directed-view" class="nav-link" data-scroll-target="#the-force-directed-view">6 · The force-directed view</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">03 · Community Detection — European Air Transport Network</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>Data vintage — June 2014.</strong> A frozen OpenFlights route snapshot, <em>not</em> the current network. Every community below describes 2014 connectivity. Community structure is a topological invariant of the route graph, so a dated snapshot is the standard, defensible choice.</p>
+</blockquote>
+<p><strong>This notebook answers Research Question 2: do natural aviation communities emerge, and do they follow country borders?</strong> It:</p>
+<ol type="1">
+<li>Runs <strong>Louvain modularity maximisation</strong> on the undirected giant component.</li>
+<li>Sweeps the resolution parameter (0.5 / 1.0 / 1.5), reporting modularity <strong>Q</strong> and community count — and checks stability across seeds, because Louvain is greedy and stochastic.</li>
+<li>Writes the chosen partition back to the <code>community</code> column of <code>network.db</code>.</li>
+<li>Tests border-alignment three ways — a country-distribution <strong>SQL</strong> query, <strong>NMI/ARI</strong> against the country partition, and Louvain-Q vs the modularity of the national partition.</li>
+<li>Maps the communities geographically (Plotly) and as a force-directed graph (PyVis).</li>
+</ol>
+<p>Graph construction lives in <code>src/build_graph.py</code>; paths and the shared palette in <code>src/utils.py</code> (imported, not redefined). Only presentation is notebook-specific.</p>
+<div id="c01" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> contextlib <span class="im">import</span> closing</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> community <span class="im">as</span> community_louvain          <span class="co"># python-louvain</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyvis.network <span class="im">import</span> Network</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    normalized_mutual_info_score,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    adjusted_rand_score,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext autoreload</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>autoreload <span class="dv">2</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _find_src() <span class="op">-&gt;</span> Path:</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Locate the repo's src/ dir so imports work regardless of launch cwd."""</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> [Path.cwd(), <span class="op">*</span>Path.cwd().parents]:</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (p <span class="op">/</span> <span class="st">"src"</span> <span class="op">/</span> <span class="st">"build_graph.py"</span>).exists():</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> p <span class="op">/</span> <span class="st">"src"</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">FileNotFoundError</span>(<span class="st">"Could not locate src/ — run this from inside the repo."</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="bu">str</span>(_find_src()))</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> build_graph <span class="im">as</span> bg</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> utils</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">"display.max_columns"</span>, <span class="va">None</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Reproducibility / tuning constants (no magic numbers below) ------------ #</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>SEED: <span class="bu">int</span> <span class="op">=</span> <span class="dv">42</span>                       <span class="co"># fixed seed for the reported partition</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>RESOLUTIONS: <span class="bu">tuple</span>[<span class="bu">float</span>, ...] <span class="op">=</span> (<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>)   <span class="co"># resolution sweep</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>RESOLUTION: <span class="bu">float</span> <span class="op">=</span> <span class="fl">1.0</span>              <span class="co"># working resolution chosen after the sweep</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>N_STAB: <span class="bu">int</span> <span class="op">=</span> <span class="dv">20</span>                     <span class="co"># seeds used to gauge sweep stability</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>WEIGHT_KEY: <span class="bu">str</span> <span class="op">=</span> <span class="st">"weight"</span>           <span class="co"># Louvain edge key (see markdown for why weighted)</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>MIN_LABEL_DEGREE: <span class="bu">int</span> <span class="op">=</span> <span class="dv">20</span>           <span class="co"># only label hubs on the PyVis canvas</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="the-undirected-giant-component" class="level2">
+<h2 class="anchored" data-anchor-id="the-undirected-giant-component">1 · The undirected giant component</h2>
+<p>Louvain runs on the <strong>undirected</strong> graph: community detection asks <em>which airports cluster together by their connections</em>, a symmetric, topological question — so direction (who initiates the route) and the carrier-count weight-as-distance reading that kept NB02’s betweenness unweighted are both irrelevant here. We restrict to the <strong>giant component</strong> (the 544-node connected core, 97% of nodes), matching NB02’s small-world and eigenvector treatment; the four peripheral fragments carry no meaningful community structure and would only appear as trivial singletons.</p>
+<div id="c03" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>digraph, undirected, edges, airports_eu <span class="op">=</span> bg.build_networks()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Giant component of the undirected projection (a copy so it is mutable/hashable</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for the community routines).</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>giant <span class="op">=</span> undirected.subgraph(<span class="bu">max</span>(nx.connected_components(undirected), key<span class="op">=</span><span class="bu">len</span>)).copy()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>degree <span class="op">=</span> <span class="bu">dict</span>(giant.degree())</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Undirected graph : </span><span class="sc">{</span>undirected<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss"> nodes, "</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"</span><span class="sc">{</span>undirected<span class="sc">.</span>number_of_edges()<span class="sc">}</span><span class="ss"> edges"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Giant component  : </span><span class="sc">{</span>giant<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss"> nodes, "</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"</span><span class="sc">{</span>giant<span class="sc">.</span>number_of_edges()<span class="sc">}</span><span class="ss"> edges "</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"(</span><span class="sc">{</span>giant<span class="sc">.</span>number_of_nodes() <span class="op">/</span> undirected<span class="sc">.</span>number_of_nodes()<span class="sc">:.1%}</span><span class="ss"> of nodes)"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Off-giant nodes  : </span><span class="sc">{</span>undirected<span class="sc">.</span>number_of_nodes() <span class="op">-</span> giant<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss"> "</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"(will receive community = NULL)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Undirected graph : 559 nodes, 5206 edges
+Giant component  : 544 nodes, 5190 edges (97.3% of nodes)
+Off-giant nodes  : 15 (will receive community = NULL)</code></pre>
+</div>
+</div>
+</section>
+<section id="resolution-sweep-how-many-communities" class="level2">
+<h2 class="anchored" data-anchor-id="resolution-sweep-how-many-communities">2 · Resolution sweep — how many communities?</h2>
+<p><strong>Louvain</strong> greedily maximises <strong>modularity Q</strong>, the fraction of within-community edges minus what a degree-preserving random graph would give; Q &gt; 0 means denser-than-chance internal wiring. The <strong>resolution</strong> γ tunes the scale: higher γ penalises large communities and yields more, smaller ones. Edges enter <em>weighted</em> by operating-carrier count — for modularity, weight reads as <strong>coupling strength</strong> (a link served by 8 carriers binds two airports more tightly than one served by 1), which is the correct semantic and, unlike betweenness’s distance reading, does not clash with NB02’s unweighted choice.</p>
+<p>Louvain is greedy and seed-dependent, so a single run can land in a poor local optimum. We report the <strong>seed = 42</strong> partition but also sweep 20 seeds per resolution to expose which γ is <em>stable</em> and which merely fragments.</p>
+<div id="c05" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> louvain_at(res: <span class="bu">float</span>, seed: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">int</span>]:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Louvain partition of the giant component at a given resolution and seed."""</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> community_louvain.best_partition(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        giant, resolution<span class="op">=</span>res, random_state<span class="op">=</span>seed, weight<span class="op">=</span>WEIGHT_KEY</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>sweep_rows <span class="op">=</span> []</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> res <span class="kw">in</span> RESOLUTIONS:</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reported run at the fixed seed.</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    part <span class="op">=</span> louvain_at(res, SEED)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    q_seed <span class="op">=</span> community_louvain.modularity(part, giant, weight<span class="op">=</span>WEIGHT_KEY)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    n_seed <span class="op">=</span> <span class="bu">len</span>(<span class="bu">set</span>(part.values()))</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Stability across N_STAB seeds.</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    counts, qs <span class="op">=</span> [], []</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(N_STAB):</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> louvain_at(res, s)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        counts.append(<span class="bu">len</span>(<span class="bu">set</span>(p.values())))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        qs.append(community_louvain.modularity(p, giant, weight<span class="op">=</span>WEIGHT_KEY))</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    sweep_rows.append({</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"resolution"</span>: res,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"communities (seed 42)"</span>: n_seed,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Q (seed 42)"</span>: <span class="bu">round</span>(q_seed, <span class="dv">4</span>),</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Q mean±sd (20 seeds)"</span>: <span class="ss">f"</span><span class="sc">{</span>np<span class="sc">.</span>mean(qs)<span class="sc">:.4f}</span><span class="ss"> ± </span><span class="sc">{</span>np<span class="sc">.</span>std(qs)<span class="sc">:.4f}</span><span class="ss">"</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"community range"</span>: <span class="ss">f"</span><span class="sc">{</span><span class="bu">min</span>(counts)<span class="sc">}</span><span class="ss">–</span><span class="sc">{</span><span class="bu">max</span>(counts)<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>sweep <span class="op">=</span> pd.DataFrame(sweep_rows)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>sweep</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">resolution</th>
+<th data-quarto-table-cell-role="th">communities (seed 42)</th>
+<th data-quarto-table-cell-role="th">Q (seed 42)</th>
+<th data-quarto-table-cell-role="th">Q mean±sd (20 seeds)</th>
+<th data-quarto-table-cell-role="th">community range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0.5</td>
+<td>17</td>
+<td>0.2663</td>
+<td>0.1717 ± 0.0548</td>
+<td>15–117</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1.0</td>
+<td>6</td>
+<td>0.2933</td>
+<td>0.2959 ± 0.0036</td>
+<td>5–8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1.5</td>
+<td>12</td>
+<td>0.2879</td>
+<td>0.2825 ± 0.0025</td>
+<td>10–14</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>Reading the sweep.</strong> γ = 0.5 is <strong>degenerate</strong> — Q collapses (≈ 0.17) and the community count swings wildly across seeds (roughly 15–120): on this dense, small-world graph the greedy optimiser cannot find coherent large communities at low resolution and shatters the network instead. γ = 1.0 is both the <strong>best-scoring and the most stable</strong> setting (6 communities, Q ≈ 0.29, community count pinned at 5–8), and γ = 1.5 subdivides it into ~12 finer, still-stable communities at slightly lower Q. We take <strong>γ = 1.0</strong> as the working partition: highest modularity, reproducible, and coarse enough to read geographically.</p>
+<section id="the-chosen-partition" class="level3">
+<h3 class="anchored" data-anchor-id="the-chosen-partition">The chosen partition</h3>
+<p>Louvain community IDs are arbitrary integers that shuffle between seeds, so we <strong>relabel by size</strong> (0 = largest) to make the <code>community</code> column and every downstream colour stable. Each community is then tagged with its member airports’ country, city and coordinates for the border test and the maps.</p>
+<div id="c08" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Final partition at the working resolution, relabelled largest-community-first.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>raw_partition <span class="op">=</span> louvain_at(RESOLUTION, SEED)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>size_order <span class="op">=</span> pd.Series(raw_partition).value_counts().index</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>relabel <span class="op">=</span> {old: new <span class="cf">for</span> new, old <span class="kw">in</span> <span class="bu">enumerate</span>(size_order)}</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>partition <span class="op">=</span> {node: relabel[c] <span class="cf">for</span> node, c <span class="kw">in</span> raw_partition.items()}</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>modularity_q <span class="op">=</span> community_louvain.modularity(raw_partition, giant, weight<span class="op">=</span>WEIGHT_KEY)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>n_communities <span class="op">=</span> <span class="bu">len</span>(<span class="bu">set</span>(partition.values()))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Working partition: </span><span class="sc">{</span>n_communities<span class="sc">}</span><span class="ss"> communities at γ = </span><span class="sc">{</span>RESOLUTION<span class="sc">}</span><span class="ss">, "</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"Q = </span><span class="sc">{</span>modularity_q<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Per-node frame: community + geography + degree (drives the SQL, maps, PyVis).</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"iata"</span>: n,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"city"</span>: giant.nodes[n].get(<span class="st">"city"</span>),</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"country"</span>: giant.nodes[n].get(<span class="st">"country"</span>),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"lat"</span>: giant.nodes[n].get(<span class="st">"lat"</span>),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"lon"</span>: giant.nodes[n].get(<span class="st">"lon"</span>),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"degree"</span>: degree[n],</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"community"</span>: partition[n],</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> giant.nodes()</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Dominant country per community — reused as human-readable map/legend labels.</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>dominant <span class="op">=</span> (</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    nodes.groupby(<span class="st">"community"</span>)[<span class="st">"country"</span>]</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    .agg(<span class="kw">lambda</span> s: s.value_counts().index[<span class="dv">0</span>])</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    .to_dict()</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>comm_label <span class="op">=</span> {c: <span class="ss">f"</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss"> · </span><span class="sc">{</span>dominant[c]<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">sorted</span>(dominant)}</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> (</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    nodes.groupby(<span class="st">"community"</span>)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    .agg(airports<span class="op">=</span>(<span class="st">"iata"</span>, <span class="st">"size"</span>),</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>         countries<span class="op">=</span>(<span class="st">"country"</span>, <span class="st">"nunique"</span>),</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>         dominant_country<span class="op">=</span>(<span class="st">"country"</span>, <span class="kw">lambda</span> s: s.value_counts().index[<span class="dv">0</span>]),</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>         top_countries<span class="op">=</span>(<span class="st">"country"</span>,</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>                        <span class="kw">lambda</span> s: <span class="st">", "</span>.join(<span class="ss">f"</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">(</span><span class="sc">{</span>v<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>                                            <span class="cf">for</span> k, v <span class="kw">in</span> s.value_counts().head(<span class="dv">3</span>).items())))</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">"airports"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Working partition: 6 communities at γ = 1.0, Q = 0.2933</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">community</th>
+<th data-quarto-table-cell-role="th">airports</th>
+<th data-quarto-table-cell-role="th">countries</th>
+<th data-quarto-table-cell-role="th">dominant_country</th>
+<th data-quarto-table-cell-role="th">top_countries</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0</td>
+<td>128</td>
+<td>31</td>
+<td>United Kingdom</td>
+<td>United Kingdom(29), Spain(14), Italy(13)</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1</td>
+<td>110</td>
+<td>19</td>
+<td>France</td>
+<td>France(38), Italy(19), Algeria(13)</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2</td>
+<td>104</td>
+<td>21</td>
+<td>Sweden</td>
+<td>Sweden(28), Russia(27), Finland(15)</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>3</td>
+<td>91</td>
+<td>17</td>
+<td>Greece</td>
+<td>Greece(36), Germany(21), Croatia(6)</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>4</td>
+<td>65</td>
+<td>9</td>
+<td>Norway</td>
+<td>Norway(46), Denmark(7), United Kingdom(6)</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>5</td>
+<td>46</td>
+<td>8</td>
+<td>Turkey</td>
+<td>Turkey(36), Ukraine(3), Iraq(2)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="writing-communities-to-the-database" class="level2">
+<h2 class="anchored" data-anchor-id="writing-communities-to-the-database">3 · Writing communities to the database</h2>
+<p>The <code>community</code> column was pre-declared NULLable in <code>schema.sql</code>, so this is an <code>UPDATE</code>, never an <code>ALTER TABLE</code> — the same pattern NB02 used for the six centrality columns. Off-giant airports keep <code>community = NULL</code> (they were never in the partition), mirroring NB02’s off-giant eigenvector = 0.0 decision: a categorical label of <em>no community</em> is more honest than forcing them into one.</p>
+<div id="c10" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>UPDATE_COMMUNITY <span class="op">=</span> <span class="st">"UPDATE nodes SET community = :community WHERE iata = :iata"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>community_rows <span class="op">=</span> [{<span class="st">"iata"</span>: n, <span class="st">"community"</span>: <span class="bu">int</span>(c)} <span class="cf">for</span> n, c <span class="kw">in</span> partition.items()]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> closing(sqlite3.<span class="ex">connect</span>(utils.DB_PATH)) <span class="im">as</span> conn:</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    conn.execute(<span class="st">"PRAGMA foreign_keys = ON"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    conn.executemany(UPDATE_COMMUNITY, community_rows)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    conn.commit()</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    labelled <span class="op">=</span> pd.read_sql(<span class="st">"SELECT COUNT(community) AS n FROM nodes"</span>, conn).at[<span class="dv">0</span>, <span class="st">"n"</span>]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    unlabelled <span class="op">=</span> pd.read_sql(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SELECT COUNT(*) AS n FROM nodes WHERE community IS NULL"</span>, conn</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    ).at[<span class="dv">0</span>, <span class="st">"n"</span>]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>off_giant <span class="op">=</span> digraph.number_of_nodes() <span class="op">-</span> giant.number_of_nodes()</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"communities written : </span><span class="sc">{</span>labelled<span class="sc">}</span><span class="ss"> (expect </span><span class="sc">{</span>giant<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"left NULL (off-giant): </span><span class="sc">{</span>unlabelled<span class="sc">}</span><span class="ss"> (expect </span><span class="sc">{</span>off_giant<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> labelled <span class="op">==</span> giant.number_of_nodes(), <span class="st">"community not written for every giant node"</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> unlabelled <span class="op">==</span> off_giant, <span class="st">"unexpected NULL count"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>communities written : 544 (expect 544)
+left NULL (off-giant): 15 (expect 15)</code></pre>
+</div>
+</div>
+</section>
+<section id="do-communities-follow-country-borders" class="level2">
+<h2 class="anchored" data-anchor-id="do-communities-follow-country-borders">4 · Do communities follow country borders?</h2>
+<p>Three complementary tests, each stricter than the last:</p>
+<ol type="1">
+<li><strong>SQL — dominant country per community.</strong> For each community, which country supplies the most airports, and what share? A high share ⇒ the community <em>is</em> essentially one country’s domestic network; a low share ⇒ Louvain fused several countries into a super-regional bloc.</li>
+<li><strong>NMI / ARI</strong> — information-theoretic and pair-counting agreement between the Louvain partition and the 52-country partition. 1.0 = identical, 0 = independent.</li>
+<li><strong>Modularity of the country partition</strong> vs Louvain’s Q — if treating each country as a community scores <em>lower</em>, then borders are a worse description of the wiring than the regional blocs are.</li>
+</ol>
+<p>The query is saved as <strong><code>sql/queries/community_country_distribution.sql</code></strong></p>
+<div id="c12" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Test 1: dominant-country SQL (read from the saved .sql file) ----------- #</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>query_path <span class="op">=</span> utils.SQL_QUERIES_DIR <span class="op">/</span> <span class="st">"community_country_distribution.sql"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sql <span class="op">=</span> query_path.read_text(encoding<span class="op">=</span><span class="st">"utf-8"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> closing(sqlite3.<span class="ex">connect</span>(utils.DB_PATH)) <span class="im">as</span> conn:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    country_distribution <span class="op">=</span> pd.read_sql(sql, conn)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Test 2: NMI / ARI vs the country partition ----------------------------- #</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>node_order <span class="op">=</span> <span class="bu">list</span>(giant.nodes())</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>louvain_labels <span class="op">=</span> [partition[n] <span class="cf">for</span> n <span class="kw">in</span> node_order]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>country_labels <span class="op">=</span> [giant.nodes[n].get(<span class="st">"country"</span>) <span class="cf">for</span> n <span class="kw">in</span> node_order]</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>nmi <span class="op">=</span> normalized_mutual_info_score(country_labels, louvain_labels)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>ari <span class="op">=</span> adjusted_rand_score(country_labels, louvain_labels)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Test 3: modularity of the country partition vs Louvain ----------------- #</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>country_ids <span class="op">=</span> {c: i <span class="cf">for</span> i, c <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">sorted</span>(<span class="bu">set</span>(country_labels)))}</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>country_partition <span class="op">=</span> {n: country_ids[giant.nodes[n].get(<span class="st">"country"</span>)] <span class="cf">for</span> n <span class="kw">in</span> giant.nodes()}</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>q_country <span class="op">=</span> community_louvain.modularity(country_partition, giant, weight<span class="op">=</span>WEIGHT_KEY)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> intra_edge_fraction(part: <span class="bu">dict</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Share of edges whose endpoints share a partition label."""</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    intra <span class="op">=</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> u, v <span class="kw">in</span> giant.edges() <span class="cf">if</span> part[u] <span class="op">==</span> part[v])</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> intra <span class="op">/</span> giant.number_of_edges()</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test 1 — dominant country per community:"</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country_distribution.to_string(index<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Test 2 — Louvain vs country partition:  NMI = </span><span class="sc">{</span>nmi<span class="sc">:.3f}</span><span class="ss">,  ARI = </span><span class="sc">{</span>ari<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test 3 — modularity, Louvain vs national borders:"</span>)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   Louvain (6 blocs)      Q = </span><span class="sc">{</span>modularity_q<span class="sc">:.4f}</span><span class="ss">   "</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"(intra-community edges </span><span class="sc">{</span>intra_edge_fraction(partition)<span class="sc">:.1%}</span><span class="ss">)"</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   Country (</span><span class="sc">{</span><span class="bu">len</span>(country_ids)<span class="sc">}</span><span class="ss"> nations) Q = </span><span class="sc">{</span>q_country<span class="sc">:.4f}</span><span class="ss">   "</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"(intra-country   edges </span><span class="sc">{</span>intra_edge_fraction(country_partition)<span class="sc">:.1%}</span><span class="ss">)"</span>)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   → Louvain modularity is </span><span class="sc">{</span>modularity_q <span class="op">/</span> q_country<span class="sc">:.1f}</span><span class="ss">× the national partition's"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test 1 — dominant country per community:
+ community_id  airports_in_community  distinct_countries dominant_country  dominant_country_airports  dominant_country_pct
+            0                    128                  31   United Kingdom                         29                  22.7
+            1                    110                  19           France                         38                  34.5
+            2                    104                  21           Sweden                         28                  26.9
+            3                     91                  17           Greece                         36                  39.6
+            4                     65                   9           Norway                         46                  70.8
+            5                     46                   8           Turkey                         36                  78.3
+
+Test 2 — Louvain vs country partition:  NMI = 0.473,  ARI = 0.242
+Test 3 — modularity, Louvain vs national borders:
+   Louvain (6 blocs)      Q = 0.2933   (intra-community edges 50.2%)
+   Country (52 nations) Q = 0.1218   (intra-country   edges 19.7%)
+   → Louvain modularity is 2.4× the national partition's</code></pre>
+</div>
+</div>
+<section id="reading-research-question-2" class="level3">
+<h3 class="anchored" data-anchor-id="reading-research-question-2">Reading Research Question 2</h3>
+<p><strong>Communities emerge, and they are geographic — but they follow <em>regions</em>, not borders.</strong> Louvain’s six blocs score <strong>Q ≈ 0.29, roughly 2.4× the modularity of the 52-country partition</strong>: about half of all links stay inside a community while only a fifth are domestic, so national boundaries are a markedly worse description of the wiring than the regional blocs are. Agreement with the country partition is only partial (<strong>NMI ≈ 0.47, ARI ≈ 0.24</strong>) — countries explain about half the structure, not all of it.</p>
+<p>The blocs split along a clean axis of <strong>internationalisation</strong>. Two are near-mono-national <strong>domestic cores</strong> — a <strong>Norway</strong> bloc (~71% Norwegian, the dense Widerøe/SAS short-haul web up the coast) and a <strong>Turkey</strong> bloc (~78% Turkish, Anatolian domestic plus a Levant fringe): countries whose internal networks are dense enough to form their own module. The rest are <strong>cross-border regional markets</strong> where no single flag dominates — a Franco-Mediterranean bloc binding France, Italy and the Maghreb; a British-Isles/Iberia/holiday bloc; a Nordic-Baltic-plus-Russia bloc; and a Central-Europe/Balkans/Greece bloc shaped as much by German charter and low-cost leisure flows as by adjacency. <strong>These are operating-carrier communities</strong>: NB02’s codeshare filter stripped out marketing-alliance structure, so what remains is who actually flies where — geography and low-cost point-to-point networks, not Star/oneworld/SkyTeam branding. (June 2014; today’s partition would differ — Wizz/Ryanair bases and 2022 airspace closures post-date the snapshot.)</p>
+</section>
+</section>
+<section id="mapping-the-communities" class="level2">
+<h2 class="anchored" data-anchor-id="mapping-the-communities">5 · Mapping the communities</h2>
+<p>Colour each airport by its Louvain community and size it by degree. If communities are geographic, the colours should form contiguous spatial regions rather than scatter at random — the visual companion to the modularity result above.</p>
+<div id="c15" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> go.Figure()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> <span class="bu">sorted</span>(nodes[<span class="st">"community"</span>].unique()):</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> nodes[nodes[<span class="st">"community"</span>] <span class="op">==</span> c]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    fig.add_trace(go.Scattergeo(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        lon<span class="op">=</span>sub[<span class="st">"lon"</span>], lat<span class="op">=</span>sub[<span class="st">"lat"</span>], mode<span class="op">=</span><span class="st">"markers"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        name<span class="op">=</span>comm_label[c],</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        marker<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>            size<span class="op">=</span><span class="dv">3</span> <span class="op">+</span> np.sqrt(sub[<span class="st">"degree"</span>]) <span class="op">*</span> <span class="fl">1.6</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span>utils.CATEGORICAL_PALETTE[c <span class="op">%</span> <span class="bu">len</span>(utils.CATEGORICAL_PALETTE)],</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>            opacity<span class="op">=</span><span class="fl">0.85</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>            line<span class="op">=</span><span class="bu">dict</span>(width<span class="op">=</span><span class="fl">0.3</span>, color<span class="op">=</span>utils.COLORS[<span class="st">"bg"</span>]),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        text<span class="op">=</span>sub[<span class="st">"city"</span>] <span class="op">+</span> <span class="st">" ("</span> <span class="op">+</span> sub[<span class="st">"iata"</span>] <span class="op">+</span> <span class="st">") · deg "</span> <span class="op">+</span> sub[<span class="st">"degree"</span>].astype(<span class="bu">str</span>),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>        hoverinfo<span class="op">=</span><span class="st">"text"</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>fig.update_geos(</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    scope<span class="op">=</span><span class="st">"world"</span>, lataxis_range<span class="op">=</span>[<span class="dv">33</span>, <span class="dv">73</span>], lonaxis_range<span class="op">=</span>[<span class="op">-</span><span class="dv">27</span>, <span class="dv">47</span>],</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    showland<span class="op">=</span><span class="va">True</span>, landcolor<span class="op">=</span>utils.COLORS[<span class="st">"land"</span>],</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    showocean<span class="op">=</span><span class="va">True</span>, oceancolor<span class="op">=</span>utils.COLORS[<span class="st">"bg"</span>],</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    showcountries<span class="op">=</span><span class="va">True</span>, countrycolor<span class="op">=</span>utils.COLORS[<span class="st">"coastline"</span>],</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    coastlinecolor<span class="op">=</span>utils.COLORS[<span class="st">"coastline"</span>], bgcolor<span class="op">=</span>utils.COLORS[<span class="st">"bg"</span>],</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="bu">dict</span>(text<span class="op">=</span><span class="ss">f"Aviation communities — </span><span class="sc">{</span>utils<span class="sc">.</span>FIG_CAPTION<span class="sc">}</span><span class="ss">"</span>, font<span class="op">=</span><span class="bu">dict</span>(size<span class="op">=</span><span class="dv">15</span>)),</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    paper_bgcolor<span class="op">=</span>utils.COLORS[<span class="st">"bg"</span>], font_color<span class="op">=</span>utils.COLORS[<span class="st">"text"</span>],</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="bu">dict</span>(title<span class="op">=</span><span class="st">"Community · dominant country"</span>, bgcolor<span class="op">=</span>utils.COLORS[<span class="st">"land"</span>],</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>                bordercolor<span class="op">=</span>utils.COLORS[<span class="st">"coastline"</span>], borderwidth<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    margin<span class="op">=</span><span class="bu">dict</span>(l<span class="op">=</span><span class="dv">0</span>, r<span class="op">=</span><span class="dv">0</span>, t<span class="op">=</span><span class="dv">40</span>, b<span class="op">=</span><span class="dv">0</span>), height<span class="op">=</span><span class="dv">650</span>,</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Static PNG for the README — kaleido may be absent; keep restart-and-run-all clean.</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> utils.FIGURES_DIR <span class="op">/</span> <span class="st">"community_map.png"</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    utils.ensure_dir(utils.FIGURES_DIR)</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    fig.write_image(<span class="bu">str</span>(out), width<span class="op">=</span><span class="dv">1100</span>, height<span class="op">=</span><span class="dv">750</span>, scale<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"saved </span><span class="sc">{</span>out<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> exc:  <span class="co"># noqa: BLE001 — export is optional, display is not</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"PNG export skipped (</span><span class="sc">{</span><span class="bu">type</span>(exc)<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">); install kaleido to regenerate."</span>)</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved /home/emilia/projects/eu-air-transport-network/figures/community_map.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+</section>
+<section id="the-force-directed-view" class="level2">
+<h2 class="anchored" data-anchor-id="the-force-directed-view">6 · The force-directed view</h2>
+<p>The map shows <em>where</em> communities sit; a <strong>force-directed layout</strong> shows <em>how tightly</em> they bind. Nodes repel, edges pull, and the spring system settles with densely-connected airports drawn together — so if the Louvain blocs are real, they should separate into visually distinct clusters with only thin bridges between them, purely from the topology, with no coordinates supplied. Colour = community, size = degree. Saved as a self-contained HTML file (<code>network_viz/community_network.html</code>) that opens in any browser.</p>
+<div id="c17" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>net <span class="op">=</span> Network(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="st">"800px"</span>, width<span class="op">=</span><span class="st">"100%"</span>, bgcolor<span class="op">=</span>utils.COLORS[<span class="st">"bg"</span>],</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    font_color<span class="op">=</span>utils.COLORS[<span class="st">"text"</span>], notebook<span class="op">=</span><span class="va">False</span>, cdn_resources<span class="op">=</span><span class="st">"in_line"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Barnes-Hut so 544 nodes settle quickly; repulsion tuned to separate the blocs.</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>net.barnes_hut(gravity<span class="op">=-</span><span class="dv">8000</span>, central_gravity<span class="op">=</span><span class="fl">0.3</span>, spring_length<span class="op">=</span><span class="dv">120</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>               spring_strength<span class="op">=</span><span class="fl">0.02</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> giant.nodes():</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    c, d <span class="op">=</span> partition[n], degree[n]</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    net.add_node(</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        n,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span>n <span class="cf">if</span> d <span class="op">&gt;=</span> MIN_LABEL_DEGREE <span class="cf">else</span> <span class="st">""</span>,   <span class="co"># only hubs are labelled</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span>(<span class="ss">f"</span><span class="sc">{</span>giant<span class="sc">.</span>nodes[n]<span class="sc">.</span>get(<span class="st">'city'</span>)<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">) — degree </span><span class="sc">{</span>d<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>               <span class="ss">f"community </span><span class="sc">{</span>comm_label[c]<span class="sc">}</span><span class="ss">"</span>),</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>utils.CATEGORICAL_PALETTE[c <span class="op">%</span> <span class="bu">len</span>(utils.CATEGORICAL_PALETTE)],</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        size<span class="op">=</span><span class="dv">6</span> <span class="op">+</span> np.sqrt(d) <span class="op">*</span> <span class="fl">2.2</span>, borderWidth<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> u, v <span class="kw">in</span> giant.edges():</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    net.add_edge(u, v, color<span class="op">=</span>utils.COLORS[<span class="st">"land"</span>], width<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>utils.ensure_dir(utils.NETWORK_VIZ_DIR)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>out_html <span class="op">=</span> utils.NETWORK_VIZ_DIR <span class="op">/</span> <span class="st">"community_network.html"</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>net.write_html(<span class="bu">str</span>(out_html), notebook<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"saved </span><span class="sc">{</span>out_html<span class="sc">}</span><span class="ss">  (</span><span class="sc">{</span>out_html<span class="sc">.</span>stat()<span class="sc">.</span>st_size <span class="op">//</span> <span class="dv">1024</span><span class="sc">}</span><span class="ss"> KB, self-contained)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved /home/emilia/projects/eu-air-transport-network/network_viz/community_network.html  (1124 KB, self-contained)</code></pre>
+</div>
+</div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p><strong>What we built.</strong> A Louvain partition of the 544-airport giant component, chosen by a stability-checked resolution sweep (γ = 1.0, <strong>6 communities, Q ≈ 0.29</strong>), persisted to the <code>community</code> column of <code>network.db</code>, and tested against national borders three ways — a country-distribution SQL query, NMI/ARI, and a country-partition modularity baseline — plus a geographic map and a force-directed PyVis view.</p>
+<p><strong>What stood out.</strong> <strong>Aviation communities are regional, not national.</strong> They score ~2.4× the modularity of the 52-country partition, half of all links stay within a community versus a fifth within a country, and agreement with borders is only partial (NMI ≈ 0.47). The blocs divide by internationalisation: dense <strong>domestic cores</strong> (Norway ~71%, Turkey ~78%) sit apart from <strong>cross-border regional markets</strong> (Franco-Mediterranean, British-Isles/Iberia, Nordic-Baltic-Russia, Central-Europe/Balkans) shaped by low-cost and charter geography. Because the codeshare filter removed alliance branding, these are <em>operating-carrier</em> communities — who really flies where in June 2014.</p>
+<p><strong>Next — <code>04_resilience_analysis.ipynb</code>.</strong> The project’s centrepiece: percolation under random failure vs targeted hub attack on the giant component, the divergence that is the <strong>Barabási (2000)</strong> result, the critical threshold f_c, and what the loss of Frankfurt, Heathrow or Amsterdam would mean for European connectivity.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/github\.com\/fatemeh-studio\/eu-air-transport-network");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

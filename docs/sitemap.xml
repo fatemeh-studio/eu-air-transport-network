@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://&lt;your-username&gt;.github.io/eu-air-transport-network/notebooks/01_graph_construction.html</loc>
-    <lastmod>2026-07-18T13:24:57.667Z</lastmod>
+    <loc>https://github.com/fatemeh-studio/eu-air-transport-network/notebooks/04_resilience_analysis.html</loc>
+    <lastmod>2026-07-20T11:51:11.403Z</lastmod>
   </url>
   <url>
-    <loc>https://&lt;your-username&gt;.github.io/eu-air-transport-network/index.html</loc>
+    <loc>https://github.com/fatemeh-studio/eu-air-transport-network/notebooks/02_centrality_stats.html</loc>
+    <lastmod>2026-07-20T11:34:39.702Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/fatemeh-studio/eu-air-transport-network/index.html</loc>
     <lastmod>2026-07-18T11:18:11.363Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/fatemeh-studio/eu-air-transport-network/notebooks/01_graph_construction.html</loc>
+    <lastmod>2026-07-20T08:13:20.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/fatemeh-studio/eu-air-transport-network/notebooks/03_community_detection.html</loc>
+    <lastmod>2026-07-20T11:50:23.375Z</lastmod>
   </url>
 </urlset>

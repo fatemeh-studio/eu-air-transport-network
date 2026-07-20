@@ -100,15 +100,15 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">01 · Graph</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./notebooks/02_centrality_stats.ipynb"> 
+    <a class="nav-link" href="./notebooks/02_centrality_stats.html"> 
 <span class="menu-text">02 · Centrality</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./notebooks/03_community_detection.ipynb"> 
+    <a class="nav-link" href="./notebooks/03_community_detection.html"> 
 <span class="menu-text">03 · Communities</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./notebooks/04_resilience_analysis.ipynb"> 
+    <a class="nav-link" href="./notebooks/04_resilience_analysis.html"> 
 <span class="menu-text">04 · Resilience</span></a>
   </li>  
 </ul>
@@ -228,60 +228,9 @@ ul.task-list li input[type="checkbox"] {
       });
       clipboardModal.on('success', onCopySuccess);
     }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
-      }
-    }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
-    }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
-    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/<your-username>\.github\.io\/eu-air-transport-network");
+        var filterRegex = new RegExp("https:\/\/github\.com\/fatemeh-studio\/eu-air-transport-network");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
