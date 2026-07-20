@@ -122,17 +122,27 @@ EOF
 
 ## Step 8 — Install the nbstripout git filter 
 
+```bash
 conda activate eu-air-network
 nbstripout --install --attributes .gitattributes
 nbstripout --status
+```
 
 ---
 
-## Step 9 — Quarto reports
+## Step 9 — Quarto website (renders to docs/, served by GitHub Pages)
 
+```bash
 quarto check
-### only after a notebook is complete and committed:
-quarto render --execute
+
+# only after ALL notebooks are complete + committed (outputs stripped):
+conda activate eu-air-network
+quarto render --execute          # _quarto.yml → website → docs/
+# do NOT use --embed-resources — assets live in docs/site_libs/ and must be committed
+git add docs && git commit -m "[site] render Quarto website to docs/"
+
+# then: Settings → Pages → Deploy from a branch → main / docs
+```
 
 ---
 
