@@ -10,7 +10,8 @@ project:
 
 website:
   title: "European Air Transport Network"
-  site-url: "https://github.com/fatemeh-studio/eu-air-transport-network"
+  site-url: "https://fatemeh-studio.github.io/eu-air-transport-network/"
+  repo-url: "https://github.com/fatemeh-studio/eu-air-transport-network"
   navbar:
     left:
       - { href: index.qmd, text: Home }
@@ -18,6 +19,10 @@ website:
       - { href: notebooks/02_centrality_stats.ipynb,   text: "02 · Centrality" }
       - { href: notebooks/03_community_detection.ipynb, text: "03 · Communities" }
       - { href: notebooks/04_resilience_analysis.ipynb, text: "04 · Resilience" }
+    right:
+      - icon: github
+        href: "https://github.com/fatemeh-studio/eu-air-transport-network"
+        aria-label: GitHub
 
 format:
   html:

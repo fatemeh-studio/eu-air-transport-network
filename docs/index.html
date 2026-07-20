@@ -112,6 +112,13 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">04 · Resilience</span></a>
   </li>  
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fatemeh-studio/eu-air-transport-network"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -122,8 +129,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#three-findings" id="toc-three-findings" class="nav-link active" data-scroll-target="#three-findings">Three findings</a></li>
+  <li><a href="#notebooks" id="toc-notebooks" class="nav-link" data-scroll-target="#notebooks">Notebooks</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -131,6 +145,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Structure &amp; Resilience of the European Air Transport Network</h1>
+<p class="subtitle lead">A complex-systems analysis of European aviation — June 2014</p>
 </div>
 
 
@@ -147,14 +162,40 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Complex-systems analysis of European aviation — centrality, community detection, and network resilience.</p>
-<blockquote class="blockquote">
-<p><strong>Data vintage — June 2014.</strong> This is a frozen OpenFlights route snapshot, not the current network. Every figure and claim on this site describes 2014.</p>
-</blockquote>
-<p><strong>Findings</strong> (fill in after NB04): - Scale-free structure — power-law exponent γ ≈ — - N communities, modularity Q ≈ — - Critical threshold f_c ≈ — (targeted) vs — (random)</p>
-<p>Data: <a href="https://openflights.org/data.html">OpenFlights</a> (open license).</p>
+<p>Complex-systems analysis of European aviation — <strong>centrality</strong>, <strong>community detection</strong>, and <strong>network resilience</strong> — on a directed, weighted graph of <strong>559 airports</strong> and <strong>10,287 routes</strong> (giant component <strong>97.3%</strong> of nodes).</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Data vintage — June 2014
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every figure and claim on this site describes a <strong>frozen OpenFlights route snapshot from June 2014</strong>, not today’s network — OpenFlights’ route feed stopped updating that month. The three questions here are <em>topological</em> (degree distribution, community structure, percolation threshold): structural invariants that don’t flip year to year, which is why a dated snapshot is fit for purpose and fully reproducible (12 MB tracked in git, no API key).</p>
+</div>
+</div>
+<p><img src="figures/route_map.png" class="img-fluid"></p>
+<section id="three-findings" class="level2">
+<h2 class="anchored" data-anchor-id="three-findings">Three findings</h2>
+<p><strong>1 · Broad-scale, not scale-free.</strong> The degree distribution is heavy-tailed but <strong>not</strong> a clean power law: a Clauset–Shalizi–Newman fit gives tail slope α = 1.59, yet the likelihood-ratio test decisively favours <strong>log-normal</strong> (R = −5.7) and <strong>truncated power law</strong> (R = −7.0) over a pure power law (<em>p</em> &lt; 0.001) — the finite-capacity ceiling of physical airport infrastructure. The network is strongly <strong>small-world</strong> (σ = 10.9).</p>
+<p><strong>2 · Communities are regional, not national.</strong> Weighted <strong>Louvain</strong> finds <strong>6 communities at Q = 0.293 — 2.4× the by-country partition</strong> (Q = 0.122); half of all edges stay inside a community (50.2%) versus a fifth inside a country (19.7%). <strong>Vienna</strong> sits in the Greece/Germany/Balkans bloc — a <strong>mid-tier hub (betweenness rank 40–45), not the East–West bridge</strong> the project set out to find.</p>
+<p><strong>3 · Robust yet fragile (Barabási 2000).</strong> The giant component halves at <strong>f_c = 0.437 under random failure</strong> but <strong>0.151 under a targeted betweenness attack</strong> — a <strong>~2.9× robustness gap</strong>, and the <strong>betweenness attack out-damages the degree attack</strong> (bridges break the network faster than hubs).</p>
+</section>
+<section id="notebooks" class="level2">
+<h2 class="anchored" data-anchor-id="notebooks">Notebooks</h2>
+<ol type="1">
+<li><a href="./notebooks/01_graph_construction.html"><strong>Graph construction</strong></a> — load, filter to Europe, build the weighted <code>networkx</code> graph, route map.</li>
+<li><a href="./notebooks/02_centrality_stats.html"><strong>Centrality &amp; structure</strong></a> — six centralities, the Vienna question, degree-distribution fit, small-world test.</li>
+<li><a href="./notebooks/03_community_detection.html"><strong>Community detection</strong></a> — weighted Louvain, regional-vs-national test, community map.</li>
+<li><a href="./notebooks/04_resilience_analysis.html"><strong>Resilience</strong></a> — random vs.&nbsp;targeted node removal, percolation threshold, failure interpretation.</li>
+</ol>
+<hr>
+<p>Code and full write-up: <a href="https://github.com/fatemeh-studio/eu-air-transport-network">github.com/fatemeh-studio/eu-air-transport-network</a>. Data: <a href="https://openflights.org/data.html">OpenFlights</a> (Open Database License).</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -230,7 +271,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/github\.com\/fatemeh-studio\/eu-air-transport-network");
+        var filterRegex = new RegExp("https:\/\/fatemeh-studio\.github\.io\/eu-air-transport-network\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

@@ -1,17 +1,22 @@
+# Runtime dependencies for the analysis notebooks.
+# Preferred install is the conda env: `conda env create -f environment.yml`.
+# This file mirrors it for pip-only / non-conda users.
+
 networkx>=3.2
 pandas>=2.0
 numpy>=1.24
 scipy>=1.11
+scikit-learn>=1.9.0
 matplotlib>=3.7
 plotly>=5.18
+kaleido>=1.3.0          # Plotly static PNG export (NB01 banner); pip name is `kaleido`
 jupyter>=1.0
 ipykernel>=6.0
-python-louvain>=0.16
+python-louvain>=0.16    # imported as `community`
 pyvis>=0.3.2
-powerlaw>=2.0.0
-scikit-learn>=1.9.0
+powerlaw>=2.0.0         # Clauset–Shalizi–Newman degree-distribution fit (NB02)
 
 # --- dev tooling (not required to run the notebooks) ---
 nbstripout>=0.7
-# Quarto is not a Python package:
+# Quarto is not a Python package — install via conda:
 #   conda install -c conda-forge quarto

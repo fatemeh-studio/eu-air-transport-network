@@ -1,16 +1,57 @@
 ---
 title: "Structure & Resilience of the European Air Transport Network"
+subtitle: "A complex-systems analysis of European aviation — June 2014"
 ---
 
-Complex-systems analysis of European aviation — centrality, community
-detection, and network resilience.
+Complex-systems analysis of European aviation — **centrality**, **community
+detection**, and **network resilience** — on a directed, weighted graph of
+**559 airports** and **10,287 routes** (giant component **97.3%** of nodes).
 
-> **Data vintage — June 2014.** This is a frozen OpenFlights route snapshot,
-> not the current network. Every figure and claim on this site describes 2014.
+::: {.callout-warning}
+## Data vintage — June 2014
+Every figure and claim on this site describes a **frozen OpenFlights route
+snapshot from June 2014**, not today's network — OpenFlights' route feed stopped
+updating that month. The three questions here are *topological* (degree
+distribution, community structure, percolation threshold): structural invariants
+that don't flip year to year, which is why a dated snapshot is fit for purpose
+and fully reproducible (12 MB tracked in git, no API key).
+:::
 
-**Findings** (fill in after NB04):
-- Scale-free structure — power-law exponent γ ≈ —
-- N communities, modularity Q ≈ —
-- Critical threshold f_c ≈ — (targeted) vs — (random)
+![](figures/route_map.png)
 
-Data: [OpenFlights](https://openflights.org/data.html) (open license).
+## Three findings
+
+**1 · Broad-scale, not scale-free.** The degree distribution is heavy-tailed but
+**not** a clean power law: a Clauset–Shalizi–Newman fit gives tail slope
+α = 1.59, yet the likelihood-ratio test decisively favours **log-normal**
+(R = −5.7) and **truncated power law** (R = −7.0) over a pure power law
+(*p* < 0.001) — the finite-capacity ceiling of physical airport infrastructure.
+The network is strongly **small-world** (σ = 10.9).
+
+**2 · Communities are regional, not national.** Weighted **Louvain** finds
+**6 communities at Q = 0.293 — 2.4× the by-country partition** (Q = 0.122);
+half of all edges stay inside a community (50.2%) versus a fifth inside a country
+(19.7%). **Vienna** sits in the Greece/Germany/Balkans bloc — a **mid-tier hub
+(betweenness rank 40–45), not the East–West bridge** the project set out to find.
+
+**3 · Robust yet fragile (Barabási 2000).** The giant component halves at
+**f_c = 0.437 under random failure** but **0.151 under a targeted betweenness
+attack** — a **~2.9× robustness gap**, and the **betweenness attack out-damages
+the degree attack** (bridges break the network faster than hubs).
+
+## Notebooks
+
+1. [**Graph construction**](notebooks/01_graph_construction.ipynb) — load, filter to
+   Europe, build the weighted `networkx` graph, route map.
+2. [**Centrality & structure**](notebooks/02_centrality_stats.ipynb) — six centralities,
+   the Vienna question, degree-distribution fit, small-world test.
+3. [**Community detection**](notebooks/03_community_detection.ipynb) — weighted Louvain,
+   regional-vs-national test, community map.
+4. [**Resilience**](notebooks/04_resilience_analysis.ipynb) — random vs. targeted node
+   removal, percolation threshold, failure interpretation.
+
+---
+
+Code and full write-up:
+[github.com/fatemeh-studio/eu-air-transport-network](https://github.com/fatemeh-studio/eu-air-transport-network).
+Data: [OpenFlights](https://openflights.org/data.html) (Open Database License).

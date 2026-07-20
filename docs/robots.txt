@@ -1,1 +1,1 @@
-Sitemap: https://github.com/fatemeh-studio/eu-air-transport-network/sitemap.xml
+Sitemap: https://fatemeh-studio.github.io/eu-air-transport-network/sitemap.xml
