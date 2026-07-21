@@ -23,6 +23,9 @@ website:
       - icon: github
         href: "https://github.com/fatemeh-studio/eu-air-transport-network"
         aria-label: GitHub
+      - text: "Interactive network"
+        href: network_viz/community_network.html
+        target: _blank
 
 format:
   html:

@@ -219,7 +219,6 @@ __marimo__/
 
 # Project-specific
 network.db
-network_viz/*.html
 *.ipynb_checkpoints
 data/raw/
 plan/

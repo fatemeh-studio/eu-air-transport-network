@@ -1,13 +1,16 @@
 # PROGRESS — European Air Transport Network
 
-**Last updated:** 2026-07-20
-**Current status:** **NB04 complete — all four notebooks done.** `04_resilience_analysis.ipynb`
-runs clean top-to-bottom in a single file (giant → percolation engine → SQL hub cross-check →
-three strategies → f_c table → resilience curve + fragmentation figures). Research Question 3 is
-answered — **the network is robust to random failure but fragile to targeted attack (Barabási
-2000)**: giant halves at f_c = 0.437 random vs 0.176 (degree) / 0.151 (betweenness) targeted —
-~2.9× robustness gap; bridges (betweenness) break it faster than hubs (degree). Next: **README &
-Quarto site** — the write-up, gallery, and GitHub Pages render.
+**Last updated:** 2026-07-19
+**Current status:** **NB03 complete.** `03_community_detection.ipynb` runs clean top-to-bottom
+in a single file (resolution sweep → partition → DB write → three border tests → geographic
+map + PyVis), writing the `community` column for the 544 giant-component nodes into
+`network.db` and saving `sql/queries/community_country_distribution.sql`. Research Question 2
+is answered — **aviation communities emerge and are geographic, but follow *regions*, not
+country borders**: Louvain finds 6 blocs at γ = 1.0 (Q = 0.2933, ≈ 2.4× the modularity of the
+52-country partition; 50% of links intra-community vs 20% intra-country; NMI 0.47 / ARI 0.24).
+Two near-mono-national domestic cores (Norway 71%, Turkey 78%) sit apart from cross-border
+LCC/charter markets. Next: **NB04** — resilience / percolation (random vs targeted attack),
+delivered as one complete notebook.
 
 > **House voice:** the format of *this file* is the project's prose style — match its
 > density, its `decision → reason` arrows, its **bold** concept lead-ins, and its dating
@@ -21,7 +24,7 @@ Quarto site** — the write-up, gallery, and GitHub Pages render.
 ### Data
 - [x] `data/airports.dat` — downloaded from OpenFlights
 - [x] `data/routes.dat` — downloaded from OpenFlights
-- [x] `data/README.md`
+- [ ] `data/README.md`
 
 ### Source modules
 - [x] `src/utils.py` — added SQL path constants
@@ -32,28 +35,24 @@ Quarto site** — the write-up, gallery, and GitHub Pages render.
 - [x] `sql/schema.sql`
 - [x] `sql/queries/top_airports_by_betweenness.sql`  *(NB02)*
 - [x] `sql/queries/community_country_distribution.sql`  *(NB03)*
-- [x] `sql/queries/hub_ranking.sql`  *(NB04)*
 
 ### Notebooks
 - [x] `01_graph_construction.ipynb`
 - [x] `02_centrality_stats.ipynb`
 - [x] `03_community_detection.ipynb`
-- [x] `04_resilience_analysis.ipynb`
+- [ ] `04_resilience_analysis.ipynb`
 
 ### Other
-- [x] `requirements.txt` (final) — added `kaleido` (pip name), scikit-learn, powerlaw>=2.0.0
-- [x] `README.md` (final)
-- [x] `figures/` (populated)
+- [ ] `requirements.txt`  *(remember to add `python-kaleido`, `powerlaw`, AND `scikit-learn` — see watch-outs)*
+- [ ] `README.md` (final)
+- [x] `figures/` (populated — `route_map.png`, `degree_distribution.png`)
 - [x] `.gitattributes` (nbstripout filter)
 - [x] `.nojekyll` (Pages serves reports/ as-is)
-- [x] `environment.yml` (NEW — one-command reproduce)
 
 ## Reports (Quarto)
 - [x] nbstripout installed (`nbstripout --status` → OK)
 - [x] Quarto installed in the conda env (`quarto check` → OK)
-- [x] `index.qmd` (rewritten — honest findings, replaced the scale-free placeholder)
-- [x] GitHub Pages enabled (Settings → Pages → Deploy from a branch → main / docs)
-- [x] `_quarto.yml` (site-url → Pages URL; GitHub navbar link)
+- [ ] GitHub Pages enabled (Settings → Pages → Deploy from a branch → main / docs)
 
 ---
 
@@ -190,29 +189,6 @@ Quarto site** — the write-up, gallery, and GitHub Pages render.
   Q = 0.293, count 5–8); γ = 1.5 subdivides into ~12. Communities relabelled largest-first so
   the DB column and every colour are seed-stable.
 
-- **Static (initial-degree/betweenness) attack, not adaptive** (NB04) → rank once on the intact
-  giant, remove in fixed order (Albert–Jeong–Barabási 2000). The adaptive re-score-every-step
-  variant (Holme 2002) is more destructive but answers a different question and costs a full
-  betweenness recompute per removal; the static order is the canonical scale-free-resilience test.
-
-- **NB04 is self-contained on the graph; the network.db read is a cross-check only** (NB04) →
-  degree + betweenness for the attack are computed on the undirected giant in-notebook (the object
-  being attacked). The SQL hub_ranking read is defensive (skips if betweenness is NULL), so
-  restart-and-run-all is clean even on a fresh DB. Persisted (directed) vs undirected-giant
-  betweenness agree at Spearman ρ = 0.989.
-
-- **environment.yml added alongside requirements.txt** (final polish)
-  → `conda env create -f environment.yml` is the single-command reproduce (README "4 commands"
-  spec); requirements.txt kept as the pip mirror. conda-forge for all but the python-louvain /
-  pyvis / powerlaw trio (pip). Additive — no change to the installed env.
-
-- **kaleido pinned by its pip name, python-kaleido by its conda name** (final polish)
-  → PyPI has no `python-kaleido` (404); the pip package is `kaleido` (1.3.0). requirements.txt
-  uses `kaleido>=1.3.0`; environment.yml's conda block uses `python-kaleido>=1.3`.
-
-- **_quarto.yml site-url → Pages URL** (was the repo URL)
-  → so the sitemap/OG tags resolve to the published site; added a GitHub navbar link.
-
 ---
 
 ## Current SQLite schema
@@ -334,18 +310,15 @@ populated (NB03): non-NULL for the 544 giant-component nodes, NULL for the 15 of
   four are cross-border LCC/charter markets (no single flag dominant)
 - **Vienna → community 3** (Greece/Germany/Balkans bloc), consistent with its 2014 CE/SE feed
 - these are *operating-carrier* communities (NB02 codeshare filter removed alliance branding)
-- 544 nodes labelled / 15 off-giant NULL in `network.db`; map → `figures/community_map.png`,
-  interactive → `network_viz/community_network.html`
+- 544 nodes labelled / 15 off-giant NULL in `network.db`; map → `figures/community_map.png`;
+  interactive network → `network_viz/community_network.html` (linked from the site navbar); the
+  static network is rendered **inline in the notebook output** (Quarto embeds it on render — not
+  saved to disk). Both carry a community legend.
 
 **NB04 — Resilience:**
-- three strategies on the 544-node giant, S(f) + component count after every removal
-- **f_c (giant < 50%): random 0.437 · degree 0.176 · betweenness 0.151** — random tolerates ~2.9× the aimed removal
-- **betweenness attack is the most damaging (bridges > hubs)**: first removed by betweenness = IST, ARN, OSL, ATH, STN; by degree = STN, AMS, BCN, IST, LGW
-- S(f) at 10%/20% removed: random 0.88/0.77 · degree 0.70/0.44 · betweenness 0.63/0.37
-- fragmentation peak (percolation signature): betweenness shatters into ~285 pieces at f≈0.40, degree ~261 at f≈0.37; random only ~43 at f≈0.68
-- SQL cross-check vs NB02 persisted betweenness: **Spearman ρ = 0.989** → directed and undirected-giant rankings agree; query → `sql/queries/hub_ranking.sql`
-- **RQ3 answer: robust to random failure, fragile to targeted attack — Barabási (2000) on real infrastructure.** The heavy-tailed degree (NB02) drives the asymmetry; Heathrow caveat (codeshare filter) restated in the interpretation.
-- figures → `figures/resilience_curve.png` (hero) + `figures/fragmentation.png`
+- Critical threshold f_c (targeted attack): —
+- Critical threshold f_c (random failure): —
+
 ---
 
 ## Known issues / watch out for
@@ -387,6 +360,23 @@ populated (NB03): non-NULL for the 544 giant-component nodes, NULL for the 15 of
   reported partition. The 20-seed sweep shows γ = 1.0 stable (5–8 communities) but γ = 0.5
   swinging 15–117 at low Q — report it as degeneracy, not a coarse partition. Re-running
   `load_db.py` drops/recreates the tables and WIPES the `community` column — re-run NB03 after.
+
+- **PyVis blanks out on this 544-node / ~5,200-edge graph with default settings** (NB03).
+  `net.write_html(..., notebook=False)` emits dead `../node_modules/vis/dist/*` references, and
+  the default dynamic-smooth edges + in-browser physics never stabilise → blank card / "page
+  load timed out" (it *does* eventually open, but slowly enough to look broken). The edge
+  `smooth:{type:"dynamic"}` default is the killer — it spawns a hidden support node per edge, so
+  ~5,200 edges become ~5,200 extra bodies to simulate. NB03 computes one seeded `nx.spring_layout`
+  and renders two views from it. The **static** view is emitted with `generate_html()` (no file
+  written), finalised, and shown **inline** in the cell output via an isolated `<iframe srcdoc>` —
+  so Quarto embeds it in the report when it executes the notebook. The **interactive** view is
+  saved to `community_network.html` with live physics but tuned to settle in a few seconds:
+  `smooth=false`, capped `stabilization.iterations`, and nodes **seeded** with the pre-computed
+  x/y so it starts near equilibrium — linked from the site navbar.
+  Both are built with `cdn_resources="in_line"`, then a finaliser string-strips
+  the dead node_modules refs and injects a community legend (colour → dominant country). **Every
+  file was verified by headless-rendering it, not just by checking it was generated** — "a file
+  exists" is not "the file works".
 
 - **East/West partition is a modelling choice (NB02).** The all-East set includes Russia/CIS,
   whose Moscow-centred flows dominate the East–West ranking; the CEE-only set excludes them.
@@ -459,58 +449,17 @@ populated (NB03): non-NULL for the 544 giant-component nodes, NULL for the 15 of
 
 ## Next chat
 
-**Task:** README + Quarto website — the final polish. All four notebooks are complete
-and tested; this chat writes the prose, renders the site, and closes the remaining loose
-ends. No notebook needs re-running for prose — every figure and number already exists here.
-Suggested chat name: `README and final polish` (split if long — see foot of section).
-
-**Read first:** this PROGRESS.md (all numbers + watch-outs live here); `src/utils.py`
-only if a figure needs a colour touch-up.
-
-**Deliverables (definition of done):**
-- [ ] `README.md` — the centrepiece (structure + numbers below)
-- [ ] `data/README.md` — OpenFlights attribution + June-2014 vintage caveat + the two
-      column schemas (GITHUB_SETUP Step 4) + the filtering trail (16,780 → 10,287)
-- [ ] `requirements.txt` — the pinned block from GITHUB_SETUP Step 7 (verify vs live env)
-- [ ] `environment.yml` — NEW file → makes reproduce one command
-      (`conda env create -f environment.yml`), hitting the README "4 commands max" spec.
-      → additive, no change to the existing env; flagged as new per house rule.
-- [ ] `_quarto.yml` + `index.qmd` — website config + landing page (architecture already
-      settled: `type: website`, `output-dir: docs`, explicit `render:` list, `--execute`)
-- [ ] `docs/` rendered + committed; `du -sh docs` under the per-file 5 MB rule
-- [ ] GitHub Pages enabled (Settings → Pages → main / docs); site link added to README
-- [ ] restart-and-run-all still clean on all four notebooks; `git status` clean
-
-**README structure (pinned):** banner (`figures/route_map.png`) → one-sentence hook →
-three findings with numbers → methods (3–4 sentences, name the theory) → gallery
-(route map, community map, resilience curve) → how-to-reproduce (≤4 cmds) → OpenFlights
-attribution + licence.
-
-**The three findings — use these numbers, and ONLY the honest framing:**
-1. **Broad-scale, not scale-free.** Heavy-tailed degree, but a pure power law is decisively
-   beaten by lognormal & truncated-PL (R = −5.7 / −7.0, p < 0.001); MLE α = 1.59 is a
-   tail-slope descriptor only. Strongly **small-world** (σ = 10.9). → the finite-capacity
-   ceiling of physical airport infrastructure.
-2. **Communities are regional, not national.** Weighted **Louvain**: 6 blocs, Q = 0.293 vs
-   the country partition's 0.122 (**2.4×**); intra-community edges 50% vs intra-country 20%.
-   Vienna sits in the Greece/Germany/Balkans bloc. *(VIE is a mid-tier hub — betweenness
-   rank 40/479 — NOT the East–West bridge. Say so.)*
-3. **Robust yet fragile (Barabási 2000).** Giant halves at f_c = 0.437 random vs 0.151
-   targeted-betweenness (**~2.9×**); the **betweenness** attack beats the **degree** attack —
-   bridges break it faster than hubs.
-
-**Hook line (honest):** "European aviation (June 2014) is a broad-scale network — resilient
-to random failure but catastrophically fragile to targeted hub attacks."
-
-**Non-negotiable watch-outs (already in this file — do not relitigate):**
-- Never "scale-free" or "Vienna is the bridge" → broad-scale/truncated; VIE mid-tier.
-  Date every claim **June 2014**.
-- Quarto **website** → `docs/`, not `reports/` (abandoned). Commit `docs/` + `docs/site_libs/`.
-  No `--embed-resources`. `quarto render` needs `--execute`. `index.qmd` + explicit `render:`
-  list stop Quarto pulling README.md / data/README.md in as stray pages.
-- Pages source = main / docs; `.nojekyll` at repo root (already created).
-- Banner PNG already exists — kaleido only needed if regenerating `figures/route_map.png`.
-
-**If the chat runs long, split here:** (a) `Quarto site build` — _quarto.yml + index.qmd +
-render + Pages; (b) `README polish` — README + data/README + requirements/environment.
-The README is the interview-facing piece — give it the room.
+**Task:** NB04 (complete, one notebook) — resilience / percolation answering Research
+Question 3 (how vulnerable is the network to targeted hub attack vs random failure?). On the
+undirected giant component: implement two node-removal strategies — **random failure** (uniform,
+averaged over 20 runs) and **targeted attack** (decreasing degree, then decreasing betweenness).
+At each removal step record fraction removed, size of the largest connected component (as a
+fraction of the original), and number of components. Plot both curves on the same axes — the
+divergence is the **Barabási (2000)** result. Find the critical threshold f_c (fraction at which
+the giant component drops below 50% of original size) for each strategy. Add a plain-language
+interpretation cell (3–5 sentences): what would the loss of Frankfurt, Heathrow or Amsterdam
+mean for European connectivity? Export the resilience curve to `figures/`. References:
+Barabási & Albert (1999) Science 286; Albert, Jeong & Barabási (2000) Nature 406. Deliver as a
+single complete `04_resilience_analysis.ipynb` — **not** split into parts.
+**Start message:** "Current state: see PROGRESS.md. Today's task: NB04 (complete, one notebook) — resilience: random failure vs targeted attack (degree then betweenness), giant-component curves on one axes, critical threshold f_c, Barabási framing, plain-language policy interpretation."
+**Relevant uploaded files Claude should read:** PROGRESS.md, src/build_graph.py, src/utils.py, src/load_db.py
