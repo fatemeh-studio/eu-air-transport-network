@@ -21,8 +21,8 @@ This is accepted deliberately, not by oversight:
   truncated), community structure, percolation threshold. These are structural invariants
   that do not flip year to year. Snapshot analysis is standard in the network-science
   literature (Guimerà & Amaral, *PNAS* 2005; Barrat et al., *PNAS* 2004).
-- **Reproducibility outweighs freshness** for a portfolio repo: a committed 12 MB file
-  regenerates the whole pipeline offline, forever.
+- **Reproducibility outweighs freshness**: a committed 12 MB file regenerates the whole 
+  pipeline offline, forever.
 
 Every figure, table and claim in this project is therefore a **June 2014** statement and
 is dated as such. Two artifacts of the vintage worth knowing: **Berlin Brandenburg (BER)
